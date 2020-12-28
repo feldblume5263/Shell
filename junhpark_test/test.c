@@ -27,11 +27,20 @@ int			main(void)
 		if (strcmp(input, "pwd") == 0)
 		{
 			child_pid = fork();
-			wait_pid = wait(&status);
-			if (child_pid == 0)
+			if (child_pid < 0)
+			{
+				printf("fork Error\n");
+				exit(0);
+			}
+			else if (child_pid == 0)
 			{
 				printf("%s\n", env.pwd);
-				exit(0);
+				sleep(1);
+				exit(3);
+			}
+			else
+			{
+				wait_pid = wait(&status);
 			}
 		}
 	}
