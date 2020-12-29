@@ -7,7 +7,12 @@
 
 #define BUF_SIZE 1000
 
-void error_handling(char *message);
+void error_handling(char *message)
+{
+	fputs(message, stderr);
+	fputc('\n', stderr);
+	exit(1);
+}
 
 int main(int argc, char *argv[])
 {
@@ -61,11 +66,4 @@ int main(int argc, char *argv[])
 	close(cp_fd);
 
 	return 0;
-}
-
-void error_handling(char *message)
-{
-	fputs(message, stderr);
-	fputc('\n', stderr);
-	exit(1);
 }
