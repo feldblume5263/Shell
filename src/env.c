@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 00:38:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/01 00:39:46 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/01 00:50:02 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int
 	int			data_size;
 
 	if (!((*node) = malloc(sizeof(struct s_env) * 1)))
-		return (-2); name_size = 0;
+		return (-2);
+	name_size = 0;
 	while (env_data[name_size] != '=')
 		name_size += 1;
 	data_size = ft_strlen(env_data) - name_size;
