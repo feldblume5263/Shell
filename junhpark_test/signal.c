@@ -7,6 +7,7 @@ void (*old_fun)(int);
 
 void		sigint_handler(int signo)
 {
+	printf("종료됩니다.\n");
 	exit(0);
 }
 
