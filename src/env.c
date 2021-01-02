@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 00:38:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/01 00:50:02 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/03 00:30:52 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int
 	{
 		if ((ret = make_env_node(env[env_index], &node) < 0))
 			return (ret);
+		node->prev = *env_copy;
 		(*env_copy)->next = node;
 		*env_copy = (*env_copy)->next;
 		env_index += 1;
