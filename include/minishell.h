@@ -6,14 +6,26 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/03 01:03:02 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/08 21:21:11 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define SHELL_NAME			"minishell"
+# define SHELL_NAME_LENGTH	9
+
+# define ARG_ERROR			-1
+# define MEM_ERROR			-2
+
 # include "libft.h"
+
+/*
+**	<stdio.h> for debugging
+*/
+
+# include <stdio.h>
 
 typedef struct		s_env
 {
@@ -29,19 +41,32 @@ typedef struct		s_shell
 }					t_shell;
 
 /*
-**	ENVIRONMENT VARIABLE PART
+**	init_env.c
 */
 
-int					make_env_node(char *env_data, t_env **node);
+int					find_char_in_str(const char c, const char *str);
 
-int					init_env(char **env, t_env **env_copy);
+void				copy_until_end\
+					(char **dest, const char *start, const char end);
 
-void				free_env_node(t_env *need_to_free);
+int					make_env_node(t_env **nptr, char *env_raw_data);
 
-void				connect_prev_and_next(t_env **temp);
+int					init_env_node(t_env **nptr);
 
-void				free_unset_args(char **args);
+int					init_env(t_env **head, char **envp);
 
-int					unset(const char *arg, t_env *env_copy);
+/*
+**	env.c
+*/
+
+void				env(t_shell *sptr);
+
+/*
+**	unset.c
+*/
+
+void				delete_env_node(t_env **eptr, const char *env_name);
+
+void				unset(t_shell *sptr, char **args);
 
 #endif
