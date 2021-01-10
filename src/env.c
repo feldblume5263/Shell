@@ -6,25 +6,25 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:02:01 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/08 18:02:19 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/10 00:46:00 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void
-	env(t_shell *sptr)
+	env(t_env *eptr)
 {
 	t_env			*head;
 
-	head = sptr->env;
-	while (sptr->env)
-	{
-		write(1, sptr->env->name, ft_strlen(sptr->env->name));
+	head = eptr;
+	while (eptr)
+	{	
+		write(1, eptr->name, ft_strlen(eptr->name));
 		write(1, "=", 1);
-		write(1, sptr->env->data, ft_strlen(sptr->env->data));
+		write(1, eptr->data, ft_strlen(eptr->data));
 		write(1, "\n", 1);
-		sptr->env = sptr->env->next;
+		eptr = eptr->next;
 	}
-	sptr->env = head;
+	eptr = head;
 }

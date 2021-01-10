@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/08 21:21:11 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/10 00:43:59 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int					init_env(t_env **head, char **envp);
 **	env.c
 */
 
-void				env(t_shell *sptr);
+void				env(t_env *eptr);
 
 /*
 **	unset.c
