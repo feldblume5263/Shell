@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 00:54:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/08 15:20:58 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/10 16:23:17 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int
 
 	if (str == (const char *)0)
 		return (-1);
-	str_index = 0; while (str[str_index])
+	str_index = 0;
+	while (str[str_index])
 	{
 		if (str[str_index] == c)
 			return (str_index);

@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:00:42 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/08 18:00:56 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/10 16:29:34 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void
 }
 
 void
-	unset(t_shell *sptr, char **args)
+	builtins_unset(t_shell *sptr, char **args)
 {
 	int				arg_index;
 

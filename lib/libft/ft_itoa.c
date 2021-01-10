@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 21:19:08 by junhpark          #+#    #+#             */
-/*   Updated: 2020/04/05 00:20:29 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/10 16:39:33 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	*pick_number(char *str, long long n, int count_ten, int minus_flag)
 char	*mk_str(long long n, int count_ten, int minus_flag)
 {
 	char	*str;
-	int		i;
 
 	if (minus_flag == 0)
 	{
@@ -62,7 +61,6 @@ char	*mk_str(long long n, int count_ten, int minus_flag)
 			return (0);
 		n *= (-1);
 	}
-	i = 0;
 	str = pick_number(str, n, count_ten, minus_flag);
 	return (str);
 }

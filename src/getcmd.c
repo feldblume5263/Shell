@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include <stdio.h>
 
 void		free_double(char ***p)
 {
@@ -25,12 +24,10 @@ void		clear_quotes(char **cmd)
 {
 	int		size;
 	int		count[2];
-	int		start;
 
 	count[0] = 0;
 	count[1] = 0;
 	size = -1;
-	start = 0;
 	while ((*cmd)[++size])
 	{
 		if ((*cmd)[size] == '"')
@@ -38,7 +35,6 @@ void		clear_quotes(char **cmd)
 		else if ((*cmd)[size] == '\'')
 			count[1]++;
 	}
-	printf("%d %d\n", count[0], count[1]);
 	if (size == 0 || count[0] % 2 != 0 || count[1] % 2 != 0)
 		return ;
 	else
@@ -138,7 +134,7 @@ void		prompt(char **cmd)
 		*cmd = 0;
 	}
 }
-
+/*
 int			main(int argc, char **argv, char **env)
 {
 	int			ret;
@@ -153,3 +149,4 @@ int			main(int argc, char **argv, char **env)
 	prompt(&cmd);
 	return (0);
 }
+*/
