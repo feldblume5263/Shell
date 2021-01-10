@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 16:32:37 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/10 20:20:33 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,11 @@ void
 
 	data = ft_split(input, ' ');
 	if (ft_strncmp(data[0], "env", 3) == 0)
-	{
-	}
+		builtins_env(sptr->env, 0);
 	else if (ft_strncmp(data[0], "unset", 5) == 0)
-	{
 		builtins_unset(sptr, &(data[1]));
-	}
 	else if (ft_strncmp(data[0], "export", 6) == 0)
-	{
 		builtins_export(sptr, &(data[1]));
-	}
 	data_index = 0;
 	while (data[data_index])
 	{
@@ -37,33 +32,6 @@ void
 		data_index += 1;
 	}
 	free(data);
-}
-
-void
-	free_env(t_env *env)
-{
-	t_env			*temp;
-
-	if (env == (t_env *)0)
-		return ;
-	while (env)
-	{
-		if (env->name)
-		{
-			free(env->name);
-			env->name = 0;
-		}
-		if (env->data)
-		{
-			free(env->data);
-			env->data = 0;
-		}
-		temp = env->next;
-		env->next = 0;
-		env->prev = 0;
-		free(env);
-		env = temp;
-	}
 }
 
 int
@@ -82,7 +50,19 @@ int
 		// error handling - must free node data
 		printf("ERROR OCCURED - INIT ENV FAILED\n");
 	}
-	builtins_export(&shell, (char **)0);
-	free_env(shell.env);
+	command_parser(&shell, "export WATER=MELON");
+	command_parser(&shell, "env");
+	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+	command_parser(&shell, "export");
+	command_parser(&shell, "export FIRE=FIGHTER");
+	command_parser(&shell, "env");
+	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+	command_parser(&shell, "export FIRE=CAMP");
+	command_parser(&shell, "env");
+	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+	command_parser(&shell, "export CAMP=FIRE ORANGE=JUICE STRAWBERRY=JELLY");
+	command_parser(&shell, "env");
+	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+	free_all_env(shell.env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 16:25:40 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 16:30:21 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/10 20:22:46 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,58 @@ void
 	eptr = head;
 }
 
+t_env
+	*find_env_by_name(t_env *head, const char *name)
+{
+	t_env			*temp;
+
+	temp = head;
+	while (temp)
+	{
+		if (ft_strncmp(name, temp->name, ft_strlen(name)) == 0)
+			return (temp);
+		temp = temp->next;
+	}
+	return ((t_env *)0);
+}
+
+void
+	export_with_null_arg(t_env *original)
+{
+	t_env			*duplicate;
+
+	duplicate = dup_all_env(original);
+	sort_env(duplicate);
+	builtins_env(duplicate, 1);
+	free_all_env(duplicate);
+}
+
 void
 	builtins_export(t_shell *sptr, char **args)
 {
-	t_env			*dup_env;
+	int				arg_index;
+	t_env			*new_env;
+	t_env			*temp;
 
-	if (args == (char **)0)
+	if (*args == (char *)0)
+		export_with_null_arg(sptr->env);
+	arg_index = 0;
+	while (args[arg_index])
 	{
-		dup_env = dup_all_env(sptr->env);
-		sort_env(dup_env);
-		builtins_env(dup_env, 1);
-		free_env(dup_env);
+		if (find_char_in_str('=', args[arg_index]) != -1)
+		{
+			init_env_node(&new_env);
+			make_env_node(&new_env, args[arg_index]);
+			if ((temp = find_env_by_name(sptr->env, new_env->name))\
+					!= (t_env *)0)
+			{
+				free(temp->data);
+				temp->data = ft_strdup(new_env->data);
+				free_env_node(new_env);
+			}
+			else
+				connect_new_env_node(&new_env, &(sptr->env));
+		}
+		arg_index += 1;
 	}
 }
