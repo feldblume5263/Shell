@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 20:23:09 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/10 20:35:31 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ t_env				*find_env_by_name(t_env *head, const char *name);
 void				export_with_null_arg(t_env *original);
 
 void				builtins_export(t_shell *sptr, char **args);
+
+/*
+**	pwd.c
+*/
+
+void				builtins_pwd(t_shell *sptr);
 
 /*
 **	free.c

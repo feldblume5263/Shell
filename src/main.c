@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 20:20:33 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/10 20:37:16 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void
 		builtins_unset(sptr, &(data[1]));
 	else if (ft_strncmp(data[0], "export", 6) == 0)
 		builtins_export(sptr, &(data[1]));
+	else if (ft_strncmp(data[0], "pwd", 3) == 0)
+		builtins_pwd(sptr);
 	data_index = 0;
 	while (data[data_index])
 	{
@@ -63,6 +65,10 @@ int
 	command_parser(&shell, "export CAMP=FIRE ORANGE=JUICE STRAWBERRY=JELLY");
 	command_parser(&shell, "env");
 	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+	command_parser(&shell, "pwd");
+	command_parser(&shell, "pwd");
+	command_parser(&shell, "pwd");
+	command_parser(&shell, "pwd");
 	free_all_env(shell.env);
 	return (0);
 }
