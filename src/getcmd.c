@@ -72,6 +72,7 @@ void		getcmd(char **cmd)
 	int		nl;
 
 	nl = 0;
+	ft_bzero(buf, 4097);
 	while ((ret = read(0, buf, 4096)) > 0)
 	{
 		buf[ret] = '\0';
@@ -85,6 +86,7 @@ void		getcmd(char **cmd)
 			}
 		}
 		make_cmd(buf, cmd);
+		ft_bzero(buf, 4097);
 		if (nl == 1)
 			break;
 	}
@@ -96,7 +98,9 @@ void		prompt(t_shell *sptr, char **cmd)
 	{
 		print_prompt();
 		getcmd(cmd);
+		printf("%s\n", *cmd);
 		handle_quotes(cmd);
+		// printf("%s\n", *cmd);
 		write(1, *cmd, ft_strlen(*cmd));
 		command_parser(sptr, *cmd);
 		free(*cmd);

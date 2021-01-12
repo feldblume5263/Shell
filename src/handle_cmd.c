@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/12 18:51:39 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/12 20:27:37 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		put_string(char **res, char *cmd)
 			(*res)[res_idx++] = cmd[cmd_idx];
 		cmd_idx++;
 	}
+	(*res)[res_idx] = '\0';
 }
 
 char		*rewrite_chunk(char *cmd, t_ch *chunk)
