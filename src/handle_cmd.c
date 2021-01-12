@@ -6,12 +6,11 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/12 18:22:08 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/12 18:51:39 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
 typedef struct	s_ch
 {
@@ -20,33 +19,6 @@ typedef struct	s_ch
 	int			big_q;
 	int			lit_q;
 }				t_ch;
-
-char	*join_newline(char const *s1, char const *s2)
-{
-	char	*newstr;
-	int		i;
-	int		j;
-
-	if (!(s1) || !(s2))
-		return (0);
-	i = -1;
-	j = 0;
-	newstr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
-	if (!(newstr))
-		return (0);
-	while (s1[++i])
-		newstr[i] = s1[i];
-	// if (newstr[i] != '\n')
-	// 	newstr[i++] = '\n';
-	while (s2[j])
-	{
-		newstr[i] = s2[j];
-		j++;
-		i++;
-	}
-	newstr[i] = '\0';
-	return (newstr);
-}
 
 void		safe_free(void *p)
 {

@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include <stdio.h>
 
 void		safe_free_double(char ***p)
 {
@@ -98,6 +97,7 @@ void		prompt(t_shell *sptr, char **cmd)
 		print_prompt();
 		getcmd(cmd);
 		handle_quotes(cmd);
+		write(1, *cmd, ft_strlen(*cmd));
 		command_parser(sptr, *cmd);
 		free(*cmd);
 		*cmd = 0;
