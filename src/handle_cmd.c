@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/13 02:16:38 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:32:40 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void		get_chunk(char *cmd, t_ch *chunk)
 			if (!cmd[idx] && chunk->count-- != -1)
 				chunk->lit_q = 0;
 		}
+		if (cmd[idx] == '\0')
+			break ;
 	}
 }
 
