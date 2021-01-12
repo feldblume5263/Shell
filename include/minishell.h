@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 21:01:01 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/12 17:17:29 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define MEM_ERROR			-2
 
 # include "libft.h"
+# include <limits.h>
 
 /*
 **	<stdio.h> for debugging
@@ -90,6 +91,11 @@ void				builtins_export(t_shell *sptr, char **args);
 */
 
 void				builtins_pwd(t_shell *sptr);
+
+/*
+**	cd.c
+*/
+void				builtins_cd(t_shell *sptr, char *new_dirname);
 
 /*
 **	free.c

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 20:37:16 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/12 17:19:50 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void
 		builtins_export(sptr, &(data[1]));
 	else if (ft_strncmp(data[0], "pwd", 3) == 0)
 		builtins_pwd(sptr);
+	else if (ft_strncmp(data[0], "cd", 2) == 0)
+		builtins_cd(sptr, data[1]);
 	data_index = 0;
 	while (data[data_index])
 	{
@@ -52,23 +54,5 @@ int
 		// error handling - must free node data
 		printf("ERROR OCCURED - INIT ENV FAILED\n");
 	}
-	command_parser(&shell, "export WATER=MELON");
-	command_parser(&shell, "env");
-	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-	command_parser(&shell, "export");
-	command_parser(&shell, "export FIRE=FIGHTER");
-	command_parser(&shell, "env");
-	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-	command_parser(&shell, "export FIRE=CAMP");
-	command_parser(&shell, "env");
-	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-	command_parser(&shell, "export CAMP=FIRE ORANGE=JUICE STRAWBERRY=JELLY");
-	command_parser(&shell, "env");
-	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-	command_parser(&shell, "pwd");
-	command_parser(&shell, "pwd");
-	command_parser(&shell, "pwd");
-	command_parser(&shell, "pwd");
-	free_all_env(shell.env);
 	return (0);
 }

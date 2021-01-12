@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/10 20:54:32 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/12 15:06:41 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void		put_string(char **res, char *cmd)
 char		*rewrite_chunk(char *cmd, t_ch *chunk)
 {
 	char	*res;
-	char	add[100];
 
 	res = (char *)malloc(sizeof(char) * chunk->size + 1);
 	put_string(&res, cmd);
@@ -123,6 +122,7 @@ void		handle_quotes(char **cmd)
 	safe_free(res);
 }
 
+/*
 int			main(void)
 {
 	char	*buf;
@@ -135,3 +135,5 @@ int			main(void)
 	printf("%s", buf);
 	return (0);
 }
+
+*/
