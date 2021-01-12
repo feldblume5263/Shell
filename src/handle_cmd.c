@@ -6,7 +6,11 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/12 15:06:41 by kyeo             ###   ########.fr       */
+=======
+/*   Updated: 2021/01/12 18:11:15 by junhpark         ###   ########.fr       */
+>>>>>>> d478f317b57a65d078c294ec00851bd1ed6d4f0b
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +25,40 @@ typedef struct	s_ch
 	int			lit_q;
 }				t_ch;
 
+char	*join_newline(char const *s1, char const *s2)
+{
+	char	*newstr;
+	int		i;
+	int		j;
+
+	if (!(s1) || !(s2))
+		return (0);
+	i = -1;
+	j = 0;
+	newstr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
+	if (!(newstr))
+		return (0);
+	while (s1[++i])
+		newstr[i] = s1[i];
+	// if (newstr[i] != '\n')
+	// 	newstr[i++] = '\n';
+	while (s2[j])
+	{
+		newstr[i] = s2[j];
+		j++;
+		i++;
+	}
+	newstr[i] = '\0';
+	return (newstr);
+}
+
 void		safe_free(void *p)
 {
-	if (p)
+	if (p && (char *)p)
+	{
 		free(p);
+		p = 0;
+	}
 }
 
 void		put_string(char **res, char *cmd)
@@ -112,16 +146,16 @@ void		handle_quotes(char **cmd)
 			write(1, "> ", 2);
 			read(0, add_buf, 100);
 			temp = ft_strjoin(*cmd, add_buf);
-			safe_free(cmd);
+			safe_free(*cmd);
 			*cmd = temp;
 		}
 	}
-	res = rewrite_chunk(temp, &chunk);
+	res = rewrite_chunk(*cmd, &chunk);
 	safe_free(*cmd);
 	*cmd = res;
-	safe_free(res);
 }
 
+<<<<<<< HEAD
 /*
 int			main(void)
 {
@@ -137,3 +171,21 @@ int			main(void)
 }
 
 */
+=======
+// int			main(void)
+// {
+// 	char	*buf;
+
+// 	while (1)
+// 	{
+// 		buf = (char *)malloc(sizeof(char) * 100);
+// 		ft_bzero(buf, 100);
+// 		read(0, buf, 100);
+// 		handle_quotes(&buf);
+// 		printf("%s", buf);
+// 		free(buf);
+// 	}
+// 	// while (1) {}
+// 	return (0);
+// }
+>>>>>>> d478f317b57a65d078c294ec00851bd1ed6d4f0b

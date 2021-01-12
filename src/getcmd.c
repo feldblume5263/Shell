@@ -1,6 +1,7 @@
 #include "minishell.h"
+#include <stdio.h>
 
-void		free_double(char ***p)
+void		safe_free_double(char ***p)
 {
 	int		idx;
 	int		size;
@@ -18,39 +19,6 @@ void		free_double(char ***p)
 	free(*p);
 	*p = 0;
 	return ;
-}
-
-void		clear_quotes(char **cmd)
-{
-	int		size;
-	int		count[2];
-
-	count[0] = 0;
-	count[1] = 0;
-	size = -1;
-	while ((*cmd)[++size])
-	{
-		if ((*cmd)[size] == '"')
-			count[0]++;
-		else if ((*cmd)[size] == '\'')
-			count[1]++;
-	}
-	if (size == 0 || count[0] % 2 != 0 || count[1] % 2 != 0)
-		return ;
-	else
-	{
-		size = size - (count[0] + count[1]);
-		// remove_quotes(cmd, size);
-	}
-}
-
-void		parse_cmd(char **cmd)
-{
-	char	**pure_cmd;
-
-	pure_cmd = ft_split(*cmd, ' ');
-	clear_quotes(&pure_cmd[0]);
-	free_double(&pure_cmd);
 }
 
 void		print_prompt(void)
@@ -129,24 +97,22 @@ void		prompt(char **cmd)
 	{
 		print_prompt();
 		getcmd(cmd);
-		parse_cmd(cmd);
+		handle_quotes(cmd);
+		write(1, *cmd, ft_strlen(*cmd));
 		free(*cmd);
 		*cmd = 0;
 	}
 }
-/*
+
 int			main(int argc, char **argv, char **env)
 {
 	int			ret;
 	t_shell		shell;
 	char		*cmd;
 
-
 	(void)argc;
 	(void)argv;
-	if ((ret = init_env(env, &(shell.env))) < 0)
-		return (ret);
 	prompt(&cmd);
 	return (0);
 }
-*/
+
