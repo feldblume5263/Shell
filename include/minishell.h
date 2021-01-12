@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/12 18:29:47 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/13 00:21:39 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ typedef struct		s_shell
 {
 	struct s_env	*env;
 }					t_shell;
+
+/*
+**	echo.c
+*/
+
+void				builtins_echo(t_shell *sptr, char **args);
+
 
 /*
 **	init_env.c

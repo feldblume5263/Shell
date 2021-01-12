@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/12 20:35:19 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/13 01:27:51 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void
 	if (*input == '\0')
 		return ;
 	data = ft_split(input, ' ');
-	// if (ft_strncmp(data[0], "echo", 4) == 0)
-	// 	builtins_echo(sptr, input);
-	// else
-	if (ft_strncmp(data[0], "env", 3) == 0)
+	if (ft_strncmp(data[0], "echo", 4) == 0)
+		builtins_echo(sptr, &(data[1]));
+	else if (ft_strncmp(data[0], "env", 3) == 0)
 		builtins_env(sptr->env, 0);
 	else if (ft_strncmp(data[0], "unset", 5) == 0)
 		builtins_unset(sptr, &(data[1]));

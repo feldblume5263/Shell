@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/12 20:27:37 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:16:38 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,3 +123,16 @@ void		handle_quotes(char **cmd)
 	safe_free(*cmd);
 	*cmd = res;
 }
+
+// int			main(void)
+// {
+// 	char	*buf;
+// 	int		idx;
+
+// 	buf = (char *)malloc(sizeof(char) * 100);
+// 	read(0, buf, 100);
+// 	idx = 0;
+// 	handle_quotes(&buf);
+// 	printf("%s\n", buf);
+// 	return (0);
+// }
