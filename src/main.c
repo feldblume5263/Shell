@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/12 20:24:21 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/12 20:35:19 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void
 	int				data_index;
 	char			**data;
 
+	if (*input == '\0')
+		return ;
 	data = ft_split(input, ' ');
 	// if (ft_strncmp(data[0], "echo", 4) == 0)
 	// 	builtins_echo(sptr, input);
