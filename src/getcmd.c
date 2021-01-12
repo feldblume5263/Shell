@@ -91,28 +91,15 @@ void		getcmd(char **cmd)
 	}
 }
 
-void		prompt(char **cmd)
+void		prompt(t_shell *sptr, char **cmd)
 {
 	while (1)
 	{
 		print_prompt();
 		getcmd(cmd);
 		handle_quotes(cmd);
-		write(1, *cmd, ft_strlen(*cmd));
+		command_parser(sptr, *cmd);
 		free(*cmd);
 		*cmd = 0;
 	}
 }
-
-int			main(int argc, char **argv, char **env)
-{
-	int			ret;
-	t_shell		shell;
-	char		*cmd;
-
-	(void)argc;
-	(void)argv;
-	prompt(&cmd);
-	return (0);
-}
-
