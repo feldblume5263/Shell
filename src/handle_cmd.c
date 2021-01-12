@@ -6,11 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/01/12 15:06:41 by kyeo             ###   ########.fr       */
-=======
-/*   Updated: 2021/01/12 18:11:15 by junhpark         ###   ########.fr       */
->>>>>>> d478f317b57a65d078c294ec00851bd1ed6d4f0b
+/*   Updated: 2021/01/12 18:22:08 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,38 +150,3 @@ void		handle_quotes(char **cmd)
 	safe_free(*cmd);
 	*cmd = res;
 }
-
-<<<<<<< HEAD
-/*
-int			main(void)
-{
-	char	*buf;
-	int		idx;
-
-	buf = (char *)malloc(sizeof(char) * 100);
-	read(0, buf, 100);
-	idx = 0;
-	handle_quotes(&buf);
-	printf("%s", buf);
-	return (0);
-}
-
-*/
-=======
-// int			main(void)
-// {
-// 	char	*buf;
-
-// 	while (1)
-// 	{
-// 		buf = (char *)malloc(sizeof(char) * 100);
-// 		ft_bzero(buf, 100);
-// 		read(0, buf, 100);
-// 		handle_quotes(&buf);
-// 		printf("%s", buf);
-// 		free(buf);
-// 	}
-// 	// while (1) {}
-// 	return (0);
-// }
->>>>>>> d478f317b57a65d078c294ec00851bd1ed6d4f0b

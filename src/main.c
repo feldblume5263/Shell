@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/12 17:19:50 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/12 18:25:54 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int
 	main(int argc, char **argv, char **envp)
 {
 	int				ret;
+	char			*cmd;
 	t_shell			shell;
 
 	if (argc != 1 || (ft_strncmp(argv[0], "./a.out", 7) != 0))
@@ -54,5 +55,7 @@ int
 		// error handling - must free node data
 		printf("ERROR OCCURED - INIT ENV FAILED\n");
 	}
+	cmd = (char *)0;
+	prompt(&shell, &cmd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/12 17:17:29 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/12 18:26:30 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,23 @@ void				builtins_cd(t_shell *sptr, char *new_dirname);
 void				free_env_node(t_env *node);
 
 void				free_all_env(t_env *env);
+
+/*
+**	handle_cmd.c
+*/
+
+void				handle_quotes(char **cmd);
+
+/*
+**	getcmd.c
+*/
+
+void				prompt(t_shell *sptr, char **cmd);
+
+/*
+**	command.c
+*/
+
+void				command_parser(t_shell *sptr, const char *input);
 
 #endif
