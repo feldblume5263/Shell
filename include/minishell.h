@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 21:01:01 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/12 17:24:27 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,8 @@ void				builtins_pwd(t_shell *sptr);
 void				free_env_node(t_env *node);
 
 void				free_all_env(t_env *env);
+
+
+void				handle_quotes(char **cmd);
 
 #endif
