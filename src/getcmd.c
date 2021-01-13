@@ -80,10 +80,7 @@ void		getcmd(char **cmd)
 		while (buf[++idx])
 		{
 			if (buf[idx] == '\n')
-			{
-				buf[idx] = '\0';
 				nl = 1;
-			}
 		}
 		make_cmd(buf, cmd);
 		ft_bzero(buf, 4097);

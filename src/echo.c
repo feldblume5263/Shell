@@ -6,42 +6,46 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 21:20:10 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/13 01:50:29 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:21:05 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			builtins_echo(t_shell *sptr, char **args)
+void			echo_with_option(t_shell *sptr, const char *input)
 {
-	char		**pureargv;
 	int			idx;
-	int			chunk_idx;
 
-	idx = 0;
-	pureargv = ft_split(*args, ' ');
 	(void)sptr;
-	if (ft_strncmp(pureargv[0], "-n", 2) == 0 && ft_strlen(pureargv[0]) == 2)
-	{
-		while ((*args)[idx] && (*args)[idx] != 'n')
-			idx++;
+	idx = 4;
+	while (input[idx] == ' ')
 		idx++;
-		write(1, &((*args)[idx]), ft_strlen(&((*args)[idx])));
-		chunk_idx = 1;
-		while (args[chunk_idx])
-		{
-			write(1, args[chunk_idx], ft_strlen(args[chunk_idx]));
-			chunk_idx++;
-		}
-	}
+	idx += 2;
+	while (input[idx] == ' ')
+		idx++;
+	write(1, &(input[idx]), ft_strlen(&(input[idx])));
+}
+
+void			echo_without_option(t_shell *sptr, const char *input)
+{
+	int			idx;
+
+	(void)sptr;
+	idx = 4;
+	while (input[idx] == ' ')
+		idx++;
+	write(1, &(input[idx]), ft_strlen(&(input[idx])));
+	write(1, "\n", 1);
+}
+
+void			builtins_echo(t_shell *sptr, char **args, const char *input)
+{
+	char		**div_arg;
+
+	div_arg = ft_split(*args, ' ');
+	(void)sptr;
+	if (ft_strncmp(div_arg[0], "-n", 2) == 0 && ft_strlen(div_arg[0]) == 2)
+		echo_with_option(sptr, input);
 	else
-	{
-		chunk_idx = 0;
-		while (args[chunk_idx])
-		{
-			write(1, args[chunk_idx], ft_strlen(args[chunk_idx]));
-			chunk_idx++;
-		}
-		write(1, "\n", 1);
-	}
+		echo_without_option(sptr, input);
 }

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/13 00:21:39 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:25:13 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct		s_shell
 **	echo.c
 */
 
-void				builtins_echo(t_shell *sptr, char **args);
+void				builtins_echo(t_shell *sptr, char **args, const char *input);
 
 
 /*
@@ -123,6 +123,8 @@ void				handle_quotes(char **cmd);
 */
 
 void				prompt(t_shell *sptr, char **cmd);
+void				getcmd(char **cmd);
+
 
 /*
 **	command.c

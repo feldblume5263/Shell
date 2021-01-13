@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/13 02:32:40 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:28:44 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		handle_quotes(char **cmd)
 {
 	char	*res;
 	t_ch	chunk;
-	char	add_buf[100];
+	char	*add_buf;
 	char	*temp;
 
 	chunk.big_q = 0;
@@ -108,14 +108,13 @@ void		handle_quotes(char **cmd)
 	// 얘를 함수 한줄로 만들어서 -> buffer 무한으로 받기
 	while (chunk.big_q == 0 || chunk.lit_q == 0)
 	{
-		ft_bzero(add_buf, 100);
 		chunk.count = 0;
 		get_chunk(*cmd, &chunk);
 		chunk.size = ft_strlen(*cmd) - (chunk.count * 2);
 		if (chunk.big_q == 0 || chunk.lit_q == 0)
 		{
 			write(1, "> ", 2);
-			read(0, add_buf, 100);
+			getcmd(&add_buf);
 			temp = ft_strjoin(*cmd, add_buf);
 			safe_free(*cmd);
 			*cmd = temp;
