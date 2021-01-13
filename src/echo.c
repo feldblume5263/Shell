@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 21:20:10 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/13 19:21:05 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:39:23 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,23 @@
 void			echo_with_option(t_shell *sptr, const char *input)
 {
 	int			idx;
+	int			nl_idx;
+	char		*input_cp;
 
 	(void)sptr;
+	input_cp = ft_strdup(input);
 	idx = 4;
-	while (input[idx] == ' ')
+	while (input_cp[idx] == ' ')
 		idx++;
 	idx += 2;
-	while (input[idx] == ' ')
+	while (input_cp[idx] == ' ')
 		idx++;
-	write(1, &(input[idx]), ft_strlen(&(input[idx])));
+	nl_idx = 0;
+	while (input_cp[nl_idx])
+		nl_idx++;
+	input_cp[--nl_idx] = '\0';
+	write(1, &(input_cp[idx]), ft_strlen(&(input_cp[idx])));
+	free(input_cp);
 }
 
 void			echo_without_option(t_shell *sptr, const char *input)
@@ -31,11 +39,11 @@ void			echo_without_option(t_shell *sptr, const char *input)
 	int			idx;
 
 	(void)sptr;
+
 	idx = 4;
 	while (input[idx] == ' ')
 		idx++;
 	write(1, &(input[idx]), ft_strlen(&(input[idx])));
-	write(1, "\n", 1);
 }
 
 void			builtins_echo(t_shell *sptr, char **args, const char *input)
