@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/13 19:28:44 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/14 00:50:44 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,6 @@ typedef struct	s_ch
 	int			big_q;
 	int			lit_q;
 }				t_ch;
-
-void		safe_free(void *p)
-{
-	if (p && (char *)p)
-	{
-		free(p);
-		p = 0;
-	}
-}
 
 void		put_string(char **res, char *cmd)
 {
@@ -105,7 +96,6 @@ void		handle_quotes(char **cmd)
 
 	chunk.big_q = 0;
 	chunk.lit_q = 0;
-	// 얘를 함수 한줄로 만들어서 -> buffer 무한으로 받기
 	while (chunk.big_q == 0 || chunk.lit_q == 0)
 	{
 		chunk.count = 0;

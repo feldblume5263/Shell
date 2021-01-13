@@ -6,11 +6,42 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 21:20:10 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/13 19:39:23 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/14 00:58:58 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void			echo_env(t_shell *sptr, char *env)
+{
+	t_env	*temp;
+
+	if ((temp = find_env_by_name(sptr->env, &(env[1]))) == (t_env *)0)
+		return ;
+	write(1, temp->data, ft_strlen(temp->data));
+}
+
+void			get_env_sign(t_shell *sptr, char *input)
+{
+	int			idx;
+	char		**env;
+
+	idx = 0;
+	while (input[idx])
+	{
+		if (input[idx] == '$')
+		{
+			env = ft_split(&(input[idx]), ' ');
+			echo_env(sptr, env[0]);
+			while (input[idx] && input[idx] != ' ')
+				idx++;
+		}
+		write(1, &(input[idx]), 1);
+		if (input[idx])
+			idx++;
+	}
+	safe_free_double(env);
+}
 
 void			echo_with_option(t_shell *sptr, const char *input)
 {
@@ -18,7 +49,6 @@ void			echo_with_option(t_shell *sptr, const char *input)
 	int			nl_idx;
 	char		*input_cp;
 
-	(void)sptr;
 	input_cp = ft_strdup(input);
 	idx = 4;
 	while (input_cp[idx] == ' ')
@@ -30,7 +60,7 @@ void			echo_with_option(t_shell *sptr, const char *input)
 	while (input_cp[nl_idx])
 		nl_idx++;
 	input_cp[--nl_idx] = '\0';
-	write(1, &(input_cp[idx]), ft_strlen(&(input_cp[idx])));
+	get_env_sign(sptr, &(input_cp[idx]));
 	free(input_cp);
 }
 
@@ -43,7 +73,7 @@ void			echo_without_option(t_shell *sptr, const char *input)
 	idx = 4;
 	while (input[idx] == ' ')
 		idx++;
-	write(1, &(input[idx]), ft_strlen(&(input[idx])));
+	get_env_sign(sptr, (char *)&(input[idx]));
 }
 
 void			builtins_echo(t_shell *sptr, char **args, const char *input)

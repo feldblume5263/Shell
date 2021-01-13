@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/13 19:25:13 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/14 00:50:36 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void				handle_quotes(char **cmd);
 */
 
 void				prompt(t_shell *sptr, char **cmd);
+
 void				getcmd(char **cmd);
 
 
@@ -131,5 +132,14 @@ void				getcmd(char **cmd);
 */
 
 void				command_parser(t_shell *sptr, const char *input);
+
+/*
+**	utils.c
+*/
+
+void				safe_free_double(char **p);
+
+void				safe_free(void *p);
+
 
 #endif
