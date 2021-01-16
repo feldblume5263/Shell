@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/16 16:59:27 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 20:46:21 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,7 @@ void				safe_free_double(char **p);
 void				safe_free(char *p);
 
 void				safe_free_temp(char **p);
+
+int					is_closed(char *str, int idx);
 
 #endif

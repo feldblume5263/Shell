@@ -6,11 +6,35 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 00:49:12 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/16 18:11:39 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 20:46:09 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int				is_closed(char *str, int idx)
+{
+	int			big_q;
+	int			lit_q;
+	int			start;
+
+	big_q = 0;
+	lit_q = 0;
+	start = 0;
+	while (str[start] && start < idx)
+	{
+		if (str[start] == '"')
+			big_q++;
+		else if (str[start] == '\'')
+			lit_q++;
+		start++;
+	}
+	printf("%d\n", big_q);
+	if (lit_q % 2 == 0 && big_q % 2 == 0)
+		return (1);
+	else
+		return (0);
+}
 
 void		safe_free_double(char **p)
 {
