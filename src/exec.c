@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/16 21:02:31 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/16 21:19:44 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ void
 	t_env			*path_env;
 
 	path_env = find_env_by_name(sptr->env, "PATH");
+	if (path_env == (t_env *)0)
+	{
+		// error handling
+		return ;
+	}
 	paths = ft_split(path_env->data, ':');
 	path_index = 0;
 	while (paths[path_index])
