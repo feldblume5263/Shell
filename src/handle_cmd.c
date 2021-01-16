@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/16 16:56:41 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 18:35:21 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void			handle_quotes(char **cmd)
 
 	chunk.big_q = 0;
 	chunk.lit_q = 0;
+	add_buf = 0;
 	while (chunk.big_q == 0 || chunk.lit_q == 0)
 	{
 		init_chunk(&chunk);

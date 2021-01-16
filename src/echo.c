@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 21:20:10 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/16 16:20:37 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 17:52:40 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ void			builtins_echo(t_shell *sptr, char **args, const char *input)
 {
 	char		**div_arg;
 
+	if (!(*args))
+	{
+		write(1, "\n", 1);
+		return ;
+	}
 	div_arg = ft_split(*args, ' ');
 	if (ft_strncmp(div_arg[0], "-n", 2) == 0 && (ft_strlen(div_arg[0]) == 2 ||
 		(ft_strlen(div_arg[0]) == 3 && div_arg[0][2] == '\n')))

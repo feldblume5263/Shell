@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/16 16:25:39 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/16 17:41:06 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int
 	find_newline_in_inputend(const char *input)
 {
 	int				input_index;
-	
+
 	input_index = 0;
 	while (input[input_index])
 		input_index += 1;
@@ -38,7 +38,7 @@ void
 		return ;
 	data = ft_split(input, ' ');
 	if (ft_strncmp(data[0], "echo", 4) == 0)
-		builtins_echo(sptr, &(data[1]), input);
+		builtins_echo(sptr, &(data[1]), raw_data);
 	else if (ft_strncmp(data[0], "env", 3) == 0)
 		builtins_env(sptr->env, 0);
 	else if (ft_strncmp(data[0], "unset", 5) == 0)
