@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   getcmd.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/15 14:48:54 by junhpark          #+#    #+#             */
+/*   Updated: 2021/01/16 16:50:22 by junhpark         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void		print_prompt(void)
@@ -65,7 +77,7 @@ void		getcmd(char **cmd)
 		make_cmd(buf, cmd);
 		ft_bzero(buf, 4097);
 		if (nl == 1)
-			break;
+			break ;
 	}
 }
 
@@ -77,7 +89,7 @@ void		prompt(t_shell *sptr, char **cmd)
 		getcmd(cmd);
 		handle_quotes(cmd);
 		command_parser(sptr, *cmd);
-		free(*cmd);
+		safe_free(*cmd);
 		*cmd = 0;
 	}
 }

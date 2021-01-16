@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/14 00:50:36 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:57:50 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,9 @@ void				command_parser(t_shell *sptr, const char *input);
 
 void				safe_free_double(char **p);
 
-void				safe_free(void *p);
+void				safe_free(char *p);
+
+void				safe_free_temp(char **p);
 
 
 #endif

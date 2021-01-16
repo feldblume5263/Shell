@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 13:38:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/14 00:50:44 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:56:41 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct	s_ch
 	int			lit_q;
 }				t_ch;
 
-void		put_string(char **res, char *cmd)
+void			put_string(char **res, char *cmd)
 {
 	int		cmd_idx;
 	int		res_idx;
@@ -48,7 +48,7 @@ void		put_string(char **res, char *cmd)
 	(*res)[res_idx] = '\0';
 }
 
-char		*rewrite_chunk(char *cmd, t_ch *chunk)
+char			*rewrite_chunk(char *cmd, t_ch *chunk)
 {
 	char	*res;
 
@@ -57,13 +57,11 @@ char		*rewrite_chunk(char *cmd, t_ch *chunk)
 	return (res);
 }
 
-void		get_chunk(char *cmd, t_ch *chunk)
+void			get_chunk(char *cmd, t_ch *chunk)
 {
 	int		idx;
 
 	idx = -1;
-	chunk->big_q = 1;
-	chunk->lit_q = 1;
 	while (cmd[++idx])
 	{
 		if (cmd[idx] && cmd[idx] == '"' && chunk->count++ != -1)
@@ -87,7 +85,14 @@ void		get_chunk(char *cmd, t_ch *chunk)
 	}
 }
 
-void		handle_quotes(char **cmd)
+void			init_chunk(t_ch *chunk)
+{
+	chunk->count = 0;
+	chunk->big_q = 1;
+	chunk->lit_q = 1;
+}
+
+void			handle_quotes(char **cmd)
 {
 	char	*res;
 	t_ch	chunk;
@@ -98,7 +103,7 @@ void		handle_quotes(char **cmd)
 	chunk.lit_q = 0;
 	while (chunk.big_q == 0 || chunk.lit_q == 0)
 	{
-		chunk.count = 0;
+		init_chunk(&chunk);
 		get_chunk(*cmd, &chunk);
 		chunk.size = ft_strlen(*cmd) - (chunk.count * 2);
 		if (chunk.big_q == 0 || chunk.lit_q == 0)
@@ -107,6 +112,7 @@ void		handle_quotes(char **cmd)
 			getcmd(&add_buf);
 			temp = ft_strjoin(*cmd, add_buf);
 			safe_free(*cmd);
+			safe_free_temp(&add_buf);
 			*cmd = temp;
 		}
 	}
@@ -114,16 +120,3 @@ void		handle_quotes(char **cmd)
 	safe_free(*cmd);
 	*cmd = res;
 }
-
-// int			main(void)
-// {
-// 	char	*buf;
-// 	int		idx;
-
-// 	buf = (char *)malloc(sizeof(char) * 100);
-// 	read(0, buf, 100);
-// 	idx = 0;
-// 	handle_quotes(&buf);
-// 	printf("%s\n", buf);
-// 	return (0);
-// }

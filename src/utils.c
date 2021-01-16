@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 00:49:12 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/14 00:49:43 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:57:51 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ void		safe_free_double(char **p)
 	p = 0;
 }
 
-void		safe_free(void *p)
+void		safe_free(char *p)
 {
-	if (p && (char *)p)
-	{
-		free(p);
-		p = 0;
-	}
+	free(p);
+	p = 0;
+}
+
+void		safe_free_temp(char **p)
+{
+	free(*p);
+	*p = 0;
 }
