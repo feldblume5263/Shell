@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/16 16:38:32 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/16 21:02:31 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,23 @@ int
 	return (0);
 }
 
+int
+	is_executable_file(const char *command)
+{
+	struct stat		buf;
+
+	stat(command, &buf);
+	if (S_ISREG(buf.st_mode) && (S_IXUSR & buf.st_mode))
+		return (1);
+	return (0);
+}
+
 void
 	execute_binary(char **args)
 {
 	pid_t			pid;
 
 	pid = fork();
-	printf("ARG0: %s\n", args[0]);
 	if (pid == 0)
 		execve(args[0], args, NULL);
 	else
@@ -36,14 +46,45 @@ void
 }
 
 void
+	path_join(t_shell *sptr, char **args)
+{
+	int				path_index;
+	char			*command;
+	char			*absolute;
+	char			**paths;
+	t_env			*path_env;
+
+	path_env = find_env_by_name(sptr->env, "PATH");
+	paths = ft_split(path_env->data, ':');
+	path_index = 0;
+	while (paths[path_index])
+	{
+		command = ft_strjoin("/", args[0]);
+		absolute = ft_strjoin(paths[path_index], command);
+		if (is_executable_file(absolute))
+		{
+			free(args[0]);
+			args[0] = absolute;
+			execute_binary(args);
+			free(command);
+			return ;
+		}
+		else
+		{
+			// error handling
+		}
+		free(command);
+		free(absolute);
+		path_index += 1;
+	}
+}
+
+void
 	exec(t_shell *sptr, char **args)
 {
-	struct stat		buf;
-
 	(void)sptr;
-	printf("ARG0: %s\n", args[0]);
-	printf("STAT: %d\n", stat(args[0], &buf));
-	printf("FILE: %d\n", S_ISREG(buf.st_mode));
-	printf("EXEC: %d\n", S_IXUSR & buf.st_mode);
-	execute_binary(args);
+	if (is_path(args[0]) && is_executable_file(args[0]))
+		execute_binary(args);
+	else
+		path_join(sptr, args);
 }
