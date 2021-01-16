@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/16 16:57:50 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:59:27 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 # include "libft.h"
 # include <limits.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 
 /*
 **	<stdio.h> for debugging
@@ -102,6 +105,7 @@ void				builtins_pwd(t_shell *sptr);
 /*
 **	cd.c
 */
+
 void				builtins_cd(t_shell *sptr, char *new_dirname);
 
 /*
@@ -126,12 +130,17 @@ void				prompt(t_shell *sptr, char **cmd);
 
 void				getcmd(char **cmd);
 
-
 /*
 **	command.c
 */
 
-void				command_parser(t_shell *sptr, const char *input);
+void				command_parser(t_shell *sptr, const char *raw_data);
+
+/*
+**	exec.c
+*/
+
+void				exec(t_shell *sptr, char **args);
 
 /*
 **	utils.c
@@ -142,6 +151,5 @@ void				safe_free_double(char **p);
 void				safe_free(char *p);
 
 void				safe_free_temp(char **p);
-
 
 #endif

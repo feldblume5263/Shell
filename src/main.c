@@ -6,18 +6,34 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/13 18:07:57 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:25:39 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int
+	find_newline_in_inputend(const char *input)
+{
+	int				input_index;
+	
+	input_index = 0;
+	while (input[input_index])
+		input_index += 1;
+	if (input_index != 0 && input[input_index - 1] == '\n')
+		return (input_index - 1);
+	return (input_index);
+}
+
 void
-	command_parser(t_shell *sptr, const char *input)
+	command_parser(t_shell *sptr, const char *raw_data)
 {
 	int				data_index;
+	char			*input;
 	char			**data;
 
+	input = ft_strdup(raw_data);
+	input[find_newline_in_inputend(input)] = '\0';
 	if (*input == '\0')
 		return ;
 	data = ft_split(input, ' ');
@@ -33,6 +49,8 @@ void
 		builtins_pwd(sptr);
 	else if (ft_strncmp(data[0], "cd", 2) == 0)
 		builtins_cd(sptr, data[1]);
+	else
+		exec(sptr, data);
 	data_index = 0;
 	while (data[data_index])
 	{
