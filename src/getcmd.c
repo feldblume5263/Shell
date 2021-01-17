@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:48:54 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/16 17:21:48 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/17 15:38:12 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,30 @@ void		getcmd(char **cmd)
 	}
 }
 
+void		headcmd(const char **cmd, char **pure)
+{
+	int		idx;
+
+	idx = 0;
+	while ((*cmd)[idx] && (*cmd)[idx] == ' ')
+		idx++;
+	while ((*cmd)[idx] && (*cmd)[idx] != ' ')
+	{
+		if ((*cmd)[idx] && (*cmd)[idx] != '"' && (*cmd)[idx] != '\'')
+
+	}
+
+}
+
 void		prompt(t_shell *sptr, char **cmd)
 {
+	char	*pure_cmd;
+
 	while (1)
 	{
 		print_prompt();
 		getcmd(cmd);
+		headcmd(cmd, &pure_cmd);
 		handle_quotes(cmd);
 		command_parser(sptr, *cmd);
 		safe_free(*cmd);
