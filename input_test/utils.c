@@ -6,11 +6,15 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 00:49:12 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/17 22:51:10 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/17 22:55:14 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# include "../include/libft.h"
+# include <limits.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 
 int				is_closed(char *str, int idx)
 {

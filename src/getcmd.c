@@ -6,11 +6,12 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:48:54 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/17 15:38:12 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/17 22:25:11 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 void		print_prompt(void)
 {
@@ -81,33 +82,77 @@ void		getcmd(char **cmd)
 	}
 }
 
-void		headcmd(const char **cmd, char **pure)
+void		headcmd(const char *cmd, char **pure)
 {
 	int		idx;
+	int		d_idx;
 
 	idx = 0;
-	while ((*cmd)[idx] && (*cmd)[idx] == ' ')
+	d_idx = 0;
+	while (cmd[idx] && cmd[idx] == ' ')
 		idx++;
-	while ((*cmd)[idx] && (*cmd)[idx] != ' ')
+	while (cmd[idx] && cmd[idx] != ' ')
 	{
-		if ((*cmd)[idx] && (*cmd)[idx] != '"' && (*cmd)[idx] != '\'')
-
+		if (!(is_closed((char *)cmd, idx)))
+		{
+			idx++;
+			while (cmd[idx] && !(is_closed((char *)cmd, idx)))
+				(*pure)[d_idx++] = cmd[idx++];
+			if (cmd[idx])
+				idx++;
+		}
+		else
+			(*pure)[d_idx++] = cmd[idx++];
 	}
+	(*pure)[d_idx] = '\0';
+}
 
+int			cmd_size(const char *cmd)
+{
+	int		idx;
+	int		size;
+
+	idx = 0;
+	size = 0;
+	while (cmd[idx] && cmd[idx] == ' ')
+		idx++;
+	while (cmd[idx] && cmd[idx] != ' ')
+	{
+		if (!(is_closed((char *)cmd, idx)))
+		{
+			idx++;
+			while (cmd[idx] && !(is_closed((char *)cmd, idx)))
+			{
+				size++;
+				idx++;
+			}
+			idx = cmd[idx] ? idx + 1 : idx;
+		}
+		else
+		{
+			size++;
+			idx++;
+		}
+	}
+	return (size);
 }
 
 void		prompt(t_shell *sptr, char **cmd)
 {
 	char	*pure_cmd;
 
+	pure_cmd = 0;
 	while (1)
 	{
 		print_prompt();
 		getcmd(cmd);
-		headcmd(cmd, &pure_cmd);
+		pure_cmd = (char *)malloc(sizeof(char) * cmd_size(*cmd) + 1);
+		headcmd(*cmd, &pure_cmd);
+		printf("%s\n", pure_cmd);
 		handle_quotes(cmd);
 		command_parser(sptr, *cmd);
 		safe_free(*cmd);
 		*cmd = 0;
+		safe_free(pure_cmd);
 	}
 }
