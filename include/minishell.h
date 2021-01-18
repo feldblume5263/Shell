@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/18 18:08:01 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/18 22:42:21 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define LIT_Q				129
 # define SPACE				130
 # define DIV				131
+# define ENV				132
 
 # include "libft.h"
 # include <limits.h>
@@ -88,7 +89,7 @@ int					cmd_join(char **cmd, char *buf, int size);
 
 void				parse_command(t_shell *sptr, char *raw);
 
-void				dispence_command(t_shell *sptr, char **data, char *raw);
+void				dispence_command(t_shell *sptr, char **data);
 
 
 /*
@@ -102,6 +103,14 @@ void				delete_subs(char **cmd);
 void				remove_backslash(char **cmd);
 
 void				remove_quotes(char **cmd);
+
+void				get_env_sign(char **cmd);
+
+/*
+**	echo.c
+*/
+
+void				builtins_echo(t_shell *sptr, char **data);
 
 /*
 **	init_env.c

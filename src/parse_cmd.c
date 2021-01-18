@@ -6,29 +6,22 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/18 18:19:52 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/18 21:13:35 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-void			dispence_command(t_shell *sptr, char **data, char *raw)
+void			dispence_command(t_shell *sptr, char **data)
 {
 	int			idx;
 
-	(void) raw;
-	if (ft_strlen(data[0]) == 4 && ft_strncmp(data[0], "echo", 4) == 0)
-	{
-		write(1, "run echo\n", 9);
-		return ;
-	}
 	idx = 0;
 	while (data[++idx])
-	{
 		delete_subs(&(data[idx]));
-		write(1, data[idx], ft_strlen(data[idx]));
-	}
-	if (ft_strlen(data[0]) == 3 && ft_strncmp(data[0], "env", 3) == 0)
+	if (ft_strlen(data[0]) == 4 && ft_strncmp(data[0], "echo", 4) == 0)
+		builtins_echo(sptr, &(data[1]));
+	else if (ft_strlen(data[0]) == 3 && ft_strncmp(data[0], "env", 3) == 0)
 		builtins_env(sptr->env, 0);
 	else if (ft_strlen(data[0]) == 5 && ft_strncmp(data[0], "unset", 5) == 0)
 		builtins_unset(sptr, &(data[1]));
@@ -50,7 +43,7 @@ void			parse_command(t_shell *sptr, char *raw)
 	idx = 0;
 	data = ft_split(raw, (char)SPACE);
 	delete_subs(&(data[0]));
-	dispence_command(sptr, data, raw);
+	dispence_command(sptr, data);
 	while (data[idx])
 	{
 		free(data[idx]);

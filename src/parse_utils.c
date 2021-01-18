@@ -6,11 +6,25 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:54:58 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/18 18:04:00 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/18 22:41:56 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		get_env_sign(char **cmd)
+{
+	int		idx;
+
+	if ((*cmd)[0] && (*cmd)[0] == '$')
+		(*cmd)[0] = (char)ENV;
+	idx = 0;
+	while ((*cmd)[++idx])
+	{
+		if ((*cmd)[idx] == '$' && (*cmd)[idx - 1] != '\\')
+			(*cmd)[idx] = (char)ENV;
+	}
+}
 
 void		remove_quotes(char **cmd)
 {
