@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/16 20:46:21 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/18 18:08:01 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 
 # define ARG_ERROR			-1
 # define MEM_ERROR			-2
+
+# define BIG_Q				128
+# define LIT_Q				129
+# define SPACE				130
+# define DIV				131
 
 # include "libft.h"
 # include <limits.h>
@@ -45,11 +50,58 @@ typedef struct		s_shell
 }					t_shell;
 
 /*
-**	echo.c
+**	prompt.c
 */
 
-void				builtins_echo(t_shell *sptr, char **args, const char *input);
+void				prompt(t_shell *sptr);
 
+void				print_prompt();
+
+void				divide_cmds(char ***cmds, char **cmd);
+
+/*
+**	refine_cmd.c
+*/
+
+void				refine_cmd(char **cmd);
+
+void				distinguish_spaces(char **cmd);
+
+void				distinguish_quotes(char **cmd);
+
+void				distinguish_semicolon(char **cmd);
+
+/*
+**	get_cmd.c
+*/
+
+void				getcmd(char **cmd);
+
+int					make_cmd(char buf[], char **cmd);
+
+int					cmd_join(char **cmd, char *buf, int size);
+
+
+/*
+**	parse_cmd.c
+*/
+
+void				parse_command(t_shell *sptr, char *raw);
+
+void				dispence_command(t_shell *sptr, char **data, char *raw);
+
+
+/*
+**	parse_utils.c
+*/
+
+int					is_closed(char *str, int idx);
+
+void				delete_subs(char **cmd);
+
+void				remove_backslash(char **cmd);
+
+void				remove_quotes(char **cmd);
 
 /*
 **	init_env.c
@@ -117,41 +169,9 @@ void				free_env_node(t_env *node);
 void				free_all_env(t_env *env);
 
 /*
-**	handle_cmd.c
-*/
-
-void				handle_quotes(char **cmd);
-
-/*
-**	getcmd.c
-*/
-
-void				prompt(t_shell *sptr, char **cmd);
-
-void				getcmd(char **cmd);
-
-/*
-**	command.c
-*/
-
-void				command_parser(t_shell *sptr, const char *raw_data);
-
-/*
 **	exec.c
 */
 
 void				exec(t_shell *sptr, char **args);
-
-/*
-**	utils.c
-*/
-
-void				safe_free_double(char **p);
-
-void				safe_free(char *p);
-
-void				safe_free_temp(char **p);
-
-int					is_closed(char *str, int idx);
 
 #endif
