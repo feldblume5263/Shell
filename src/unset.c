@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:00:42 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 16:29:34 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/18 18:31:17 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void
 	{
 		if (ft_strncmp((*eptr)->name, env_name, ft_strlen(env_name)) == 0)
 		{
+			if ((*eptr) == head)
+				head = head->next;
 			if ((*eptr)->prev)
 				(*eptr)->prev->next = (*eptr)->next;
 			if ((*eptr)->next)
@@ -48,6 +50,9 @@ void
 	arg_index = 0;
 	while (args && args[arg_index])
 	{
+		printf("ARG: %s\n", args[arg_index]);
+		printf("ENVADDR: %p\n", sptr->env);
+		printf("HEAD-DATA: %s\n", sptr->env->name);
 		delete_env_node(&(sptr->env), args[arg_index]);
 		arg_index += 1;
 	}
