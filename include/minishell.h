@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/24 11:15:31 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/24 14:48:24 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # include "libft.h"
 # include <limits.h>
+# include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -127,6 +128,14 @@ void				ch_without_redir(char ***data, char ***res, char ***redir);
 void				get_redir(char *red, char ***res);
 
 int					find_redir(char *chunk);
+
+/*
+**	redirection.c
+*/
+
+int					redirection(char **redir);
+
+int					redirect_out(char *redir);
 
 /*
 **	redirection_utils.c

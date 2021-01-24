@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:48:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/18 22:41:50 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/24 14:58:50 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		distinguish_semicolon(char **cmd)
 {
 	int		idx;
 
+	if (*cmd == 0)
+		return ;
 	if ((*cmd)[0] && (*cmd)[0] == ';')
 		(*cmd)[0] = (char)DIV;
 	idx = 1;
@@ -54,6 +56,8 @@ void		distinguish_quotes(char **cmd)
 {
 	int		idx;
 
+	if (*cmd == 0)
+		return ;
 	if ((*cmd)[0] && (*cmd)[0] == '"')
 		(*cmd)[0] = (char)BIG_Q;
 	else if ((*cmd)[0] && (*cmd)[0] == '\'')
@@ -73,6 +77,8 @@ void		distinguish_spaces(char **cmd)
 {
 	int		idx;
 
+	if (*cmd == 0)
+		return ;
 	idx = 0;
 	while ((*cmd)[idx])
 	{

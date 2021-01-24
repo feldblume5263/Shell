@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/22 17:43:35 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/24 15:37:03 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,30 @@ void			parse_command(t_shell *sptr, char *raw)
 	char		**data;
 	char		**redir;
 	int			idx;
+	int			saved_stdout;
 
-	idx = 0;
+	saved_stdout = dup(STDOUT_FILENO);
 	data = ft_split(raw, (char)SPACE);
 	parse_redirection(&data, &redir);
 	delete_subs(&(data[0]));
+	if (redirection(redir) < 0)
+		return ;
 	dispence_command(sptr, data);
-	while (data[idx])
+	idx = -1;
+	while (data[++idx])
 	{
 		free(data[idx]);
 		data[idx] = 0;
-		idx++;
 	}
 	free(data);
 	data = 0;
+	idx = -1;
+	while (redir[++idx])
+	{
+		free(redir[idx]);
+		redir[idx] = 0;
+	}
+	free(redir);
+	redir = 0;
+	dup2(saved_stdout, STDOUT_FILENO);
 }
