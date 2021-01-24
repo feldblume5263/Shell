@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/18 22:42:21 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/24 11:15:31 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 /*
 **	<stdio.h> for debugging
@@ -49,6 +50,15 @@ typedef struct		s_shell
 {
 	struct s_env	*env;
 }					t_shell;
+
+
+typedef struct		s_redir
+{
+	char			**in;
+	char			**out_s;
+	char			**out_d;
+}					t_redir;
+
 
 /*
 **	prompt.c
@@ -105,6 +115,28 @@ void				remove_backslash(char **cmd);
 void				remove_quotes(char **cmd);
 
 void				get_env_sign(char **cmd);
+
+/*
+**	parse_redirection.c
+*/
+
+int					parse_redirection(char ***data, char ***redir);
+
+void				ch_without_redir(char ***data, char ***res, char ***redir);
+
+void				get_redir(char *red, char ***res);
+
+int					find_redir(char *chunk);
+
+/*
+**	redirection_utils.c
+*/
+
+void				init_redir(char ***redir, int size);
+
+int					count_all(char **data);
+
+int					count_ch(char **data);
 
 /*
 **	echo.c

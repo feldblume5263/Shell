@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/20 15:36:57 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/22 17:43:35 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void			dispence_command(t_shell *sptr, char **data)
 	int			idx;
 
 	idx = 0;
+	if (!(data[idx]))
+		return ;
 	while (data[++idx])
 		delete_subs(&(data[idx]));
 	if (ft_strlen(data[0]) == 4 && ft_strncmp(data[0], "echo", 4) == 0)
@@ -38,10 +40,12 @@ void			dispence_command(t_shell *sptr, char **data)
 void			parse_command(t_shell *sptr, char *raw)
 {
 	char		**data;
+	char		**redir;
 	int			idx;
 
 	idx = 0;
 	data = ft_split(raw, (char)SPACE);
+	parse_redirection(&data, &redir);
 	delete_subs(&(data[0]));
 	dispence_command(sptr, data);
 	while (data[idx])
