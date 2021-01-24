@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/24 14:48:24 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/24 16:48:05 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,20 @@ void				remove_quotes(char **cmd);
 void				get_env_sign(char **cmd);
 
 /*
+**	redirection.c
+*/
+
+int					redirection(char **redir);
+
+int					handle_redir_error(char **redir);
+
+int					redirect_out(char *redir);
+
+int					redirect_out_d(char *redir);
+
+int					redirect_in(char *redir);
+
+/*
 **	parse_redirection.c
 */
 
@@ -129,13 +143,6 @@ void				get_redir(char *red, char ***res);
 
 int					find_redir(char *chunk);
 
-/*
-**	redirection.c
-*/
-
-int					redirection(char **redir);
-
-int					redirect_out(char *redir);
 
 /*
 **	redirection_utils.c
