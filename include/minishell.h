@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/24 16:48:05 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/25 16:10:22 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,8 @@ void				builtins_cd(t_shell *sptr, char *new_dirname);
 void				free_env_node(t_env *node);
 
 void				free_all_env(t_env *env);
+
+void				free_double_ptr(void ***dptr);
 
 /*
 **	exec.c

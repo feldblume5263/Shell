@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/24 15:37:03 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/25 16:14:13 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void			dispence_command(t_shell *sptr, char **data)
 {
 	int			idx;
 
+	idx = 0;
+	while (data[idx])
+	{
+		printf("DATA[%d]: %s\n", idx, data[idx]);
+		idx += 1;
+	}
 	idx = 0;
 	if (!(data[idx]))
 		return ;
@@ -41,9 +47,9 @@ void			parse_command(t_shell *sptr, char *raw)
 {
 	char		**data;
 	char		**redir;
-	int			idx;
 	int			saved_stdout;
 
+	printf("RAW: %s\n", raw);
 	saved_stdout = dup(STDOUT_FILENO);
 	data = ft_split(raw, (char)SPACE);
 	parse_redirection(&data, &redir);
@@ -51,21 +57,7 @@ void			parse_command(t_shell *sptr, char *raw)
 	if (redirection(redir) < 0)
 		return ;
 	dispence_command(sptr, data);
-	idx = -1;
-	while (data[++idx])
-	{
-		free(data[idx]);
-		data[idx] = 0;
-	}
-	free(data);
-	data = 0;
-	idx = -1;
-	while (redir[++idx])
-	{
-		free(redir[idx]);
-		redir[idx] = 0;
-	}
-	free(redir);
-	redir = 0;
+	free_double_ptr((void ***)&data);
+	free_double_ptr((void ***)&redir);
 	dup2(saved_stdout, STDOUT_FILENO);
 }

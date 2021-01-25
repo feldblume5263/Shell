@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:09:44 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/24 11:14:34 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/25 16:14:56 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void			ch_without_redir(char ***data, char ***res, char ***redir)
 	free(*data);
 	*data = *res;
 }
-
 
 int				parse_redirection(char ***data, char ***redir)
 {

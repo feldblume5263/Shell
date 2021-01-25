@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:20:17 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/10 20:20:34 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/25 16:09:26 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,23 @@ void
 		temp = env->next;
 		free_env_node(env);
 		env = temp;
+	}
+}
+
+void		free_double_ptr(void ***dptr)
+{
+	int		index;
+
+	index = 0;
+	while (*dptr && (*dptr)[index])
+	{
+		free((*dptr)[index]);
+		(*dptr)[index] = NULL;
+		index += 1;
+	}
+	if (*dptr)
+	{
+		free(*dptr);
+		*dptr = NULL;
 	}
 }
