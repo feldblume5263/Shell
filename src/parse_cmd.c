@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/25 16:14:13 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/26 14:01:23 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ void			dispence_command(t_shell *sptr, char **data)
 {
 	int			idx;
 
-	idx = 0;
-	while (data[idx])
-	{
-		printf("DATA[%d]: %s\n", idx, data[idx]);
-		idx += 1;
-	}
 	idx = 0;
 	if (!(data[idx]))
 		return ;
@@ -43,21 +37,119 @@ void			dispence_command(t_shell *sptr, char **data)
 		exec(sptr, data);
 }
 
+int
+	count_char_in_str(const char *string, const char c)
+{
+	int			index;
+	int			number_of_characters;
+
+	index = 0;
+	number_of_characters = 0;
+	while (string && string[index])
+	{
+		if (string[index] == c)
+			number_of_characters += 1;
+		index += 1;
+	}
+	return (number_of_characters);
+}
+
 void			parse_command(t_shell *sptr, char *raw)
 {
+	pid_t		pid;
+	int			old_fds[2];
+	int			new_fds[2];
+	int			pipe_count;
+	int			pipe_cmd_index;
+	int			num_pipes;
+	char		***data_piped;
+
+	int			saved_stdout;
 	char		**data;
 	char		**redir;
-	int			saved_stdout;
 
-	printf("RAW: %s\n", raw);
-	saved_stdout = dup(STDOUT_FILENO);
-	data = ft_split(raw, (char)SPACE);
-	parse_redirection(&data, &redir);
-	delete_subs(&(data[0]));
-	if (redirection(redir) < 0)
+	if (*raw == '\0')
 		return ;
-	dispence_command(sptr, data);
+	saved_stdout = dup(STDOUT_FILENO);
+	num_pipes = count_char_in_str(raw, '|');
+	data_piped = malloc(sizeof(char **) * (num_pipes + 1 + 1));
+	pipe_cmd_index = 0;
+	data = ft_split(raw, '|');
+	(void)redir;
+	//printf("NUM PIPES: %d\n", num_pipes);
+	while (pipe_cmd_index < (num_pipes + 1))
+	{
+		data_piped[pipe_cmd_index] = ft_split(data[pipe_cmd_index], (char)SPACE);
+		/*
+		parse_redirection(&data_piped[pipe_cmd_index], &redir);
+		delete_subs(data_piped[pipe_cmd_index]);
+		if (redirection(redir) < 0)
+			break ;
+		*/
+		pipe_cmd_index += 1;
+		//printf("PIPE_CMD_IONDX: %d\n", pipe_cmd_index);
+	}
 	free_double_ptr((void ***)&data);
-	free_double_ptr((void ***)&redir);
+	data_piped[pipe_cmd_index] = (char **)NULL;
+	pipe_cmd_index = 0;
+	while (data_piped[pipe_cmd_index])
+	{
+		// 다음으로 실행할 명령이 있다면
+		if (data_piped[pipe_cmd_index + 1])
+			pipe(new_fds);
+		pid = fork();
+		if (pid == 0)
+		{
+			// 이전에 호출한 명령이 있다면
+			if (pipe_cmd_index)
+			{
+				dup2(old_fds[0], 0);
+				close(old_fds[0]);
+				close(old_fds[1]);
+			}
+			// 다음에 호출할 명령이 있다면
+			if (data_piped[pipe_cmd_index + 1])
+			{
+				close(new_fds[0]);
+				dup2(new_fds[1], 1);
+				close(new_fds[1]);
+			}
+			dispence_command(sptr, data_piped[pipe_cmd_index]);
+		}
+		else
+		{
+			if (pipe_cmd_index)
+			{
+				close(old_fds[0]);
+				close(old_fds[1]);
+			}
+			if (data_piped[pipe_cmd_index + 1])
+			{
+				old_fds[0] = new_fds[0];
+				old_fds[1] = new_fds[1];
+			}
+		}
+		pipe_cmd_index += 1;
+	}
+	// 명령이 여러개라면
+	if (pipe_cmd_index)
+	{
+		close(old_fds[0]);
+		close(old_fds[1]);
+	}
+	if (num_pipes == 0)
+		wait(NULL);
+	else
+	{
+		pipe_count = 0;
+		// 파이프의 개수만큼
+		while (pipe_count < (num_pipes + 1))
+		{
+			wait(NULL);
+			pipe_count += 1;
+		}
+	}
+	//free_double_ptr((void ***)&redir);
 	dup2(saved_stdout, STDOUT_FILENO);
+	return ;
 }
