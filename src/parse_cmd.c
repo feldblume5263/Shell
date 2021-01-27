@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/26 14:01:23 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/27 15:29:02 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,14 @@ void			parse_command(t_shell *sptr, char *raw)
 	data_piped = malloc(sizeof(char **) * (num_pipes + 1 + 1));
 	pipe_cmd_index = 0;
 	data = ft_split(raw, '|');
-	(void)redir;
 	//printf("NUM PIPES: %d\n", num_pipes);
 	while (pipe_cmd_index < (num_pipes + 1))
 	{
 		data_piped[pipe_cmd_index] = ft_split(data[pipe_cmd_index], (char)SPACE);
-		/*
 		parse_redirection(&data_piped[pipe_cmd_index], &redir);
 		delete_subs(data_piped[pipe_cmd_index]);
 		if (redirection(redir) < 0)
 			break ;
-		*/
 		pipe_cmd_index += 1;
 		//printf("PIPE_CMD_IONDX: %d\n", pipe_cmd_index);
 	}
@@ -115,6 +112,7 @@ void			parse_command(t_shell *sptr, char *raw)
 				close(new_fds[1]);
 			}
 			dispence_command(sptr, data_piped[pipe_cmd_index]);
+			return ;
 		}
 		else
 		{
@@ -149,7 +147,7 @@ void			parse_command(t_shell *sptr, char *raw)
 			pipe_count += 1;
 		}
 	}
-	//free_double_ptr((void ***)&redir);
+	free_double_ptr((void ***)&redir);
 	dup2(saved_stdout, STDOUT_FILENO);
 	return ;
 }
