@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 11:32:20 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/24 16:45:36 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/26 16:57:57 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				redirect_out(char *redir)
 		return (-1);
 	if ((outfd = open(outfile, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1)
 		return (-1);
-	if (dup2(outfd, STDOUT_FILENO) == -1)
+	if (dup2(outfd, STDIN_FILENO) == -1)
 	{
 		close(outfd);
 		return (-1);
