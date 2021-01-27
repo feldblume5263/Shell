@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/27 15:29:02 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/27 22:13:21 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,100 +54,108 @@ int
 	return (number_of_characters);
 }
 
-void			parse_command(t_shell *sptr, char *raw)
+int
+	set_data_with_redirection(t_pipe *pptr, char ****cptr, const char *raw)
 {
-	pid_t		pid;
-	int			old_fds[2];
-	int			new_fds[2];
-	int			pipe_count;
-	int			pipe_cmd_index;
-	int			num_pipes;
-	char		***data_piped;
-
-	int			saved_stdout;
+	int			cmds_index;
+	int			number_of_commands;
 	char		**data;
 	char		**redir;
 
-	if (*raw == '\0')
-		return ;
-	saved_stdout = dup(STDOUT_FILENO);
-	num_pipes = count_char_in_str(raw, '|');
-	data_piped = malloc(sizeof(char **) * (num_pipes + 1 + 1));
-	pipe_cmd_index = 0;
+	pptr->num_pipes = count_char_in_str(raw, '|');
+	number_of_commands = pptr->num_pipes + 1;
+	if ((*cptr = malloc(sizeof(char **) * (number_of_commands + 1))) == NULL)
+		return (MEM_ERROR);
 	data = ft_split(raw, '|');
-	//printf("NUM PIPES: %d\n", num_pipes);
-	while (pipe_cmd_index < (num_pipes + 1))
+	cmds_index = 0;
+	while (cmds_index < number_of_commands)
 	{
-		data_piped[pipe_cmd_index] = ft_split(data[pipe_cmd_index], (char)SPACE);
-		parse_redirection(&data_piped[pipe_cmd_index], &redir);
-		delete_subs(data_piped[pipe_cmd_index]);
-		if (redirection(redir) < 0)
-			break ;
-		pipe_cmd_index += 1;
-		//printf("PIPE_CMD_IONDX: %d\n", pipe_cmd_index);
+		(*cptr)[cmds_index] = ft_split(data[cmds_index], (char)SPACE);
+		parse_redirection(&(*cptr)[cmds_index], &redir);
+	 	free_double_ptr((void ***)&redir);
+		delete_subs((*cptr)[cmds_index]);
+		cmds_index += 1;
 	}
 	free_double_ptr((void ***)&data);
-	data_piped[pipe_cmd_index] = (char **)NULL;
-	pipe_cmd_index = 0;
-	while (data_piped[pipe_cmd_index])
+	if (number_of_commands == cmds_index)
+		(*cptr)[cmds_index] = (char **)NULL;
+	return (0);
+}
+
+void
+	dup2_and_close(int *fd, const int option)
+{
+	if (option == 0)
+		dup2(fd[0], 0);
+	else if (option == 1)
+		dup2(fd[1], 1);
+	if (option == 0 || option == 1 || option == -1)
+	{
+		close(fd[0]);
+		close(fd[1]);
+	}
+}
+
+void
+	swap_fd_value(int *old, int *new)
+{
+	old[0] = new[0];
+	old[1] = new[1];
+}
+
+void
+	wait_loop(const int max)
+{
+	int			count;
+
+	count = 0;
+	while (count < max)
+	{
+		wait(NULL);
+		count += 1;
+	}
+}
+
+void			sig_handler(int signo);
+
+void			parse_command(t_shell *sptr, char *raw)
+{
+	pid_t		pid;
+	t_pipe		pip;
+	int			cmds_index;
+	char		***cmds_redirected;
+
+	if (ft_strlen(raw) == 4 && ft_strncmp("exit", raw, 4) == 0)
+		builtins_exit(sptr, (char **)NULL);
+	set_data_with_redirection(&pip, &cmds_redirected, raw);
+	cmds_index = 0;
+	while (cmds_redirected[cmds_index])
 	{
 		// 다음으로 실행할 명령이 있다면
-		if (data_piped[pipe_cmd_index + 1])
-			pipe(new_fds);
+		if (cmds_redirected[cmds_index + 1])
+			pipe(pip.new_fds);
 		pid = fork();
 		if (pid == 0)
 		{
 			// 이전에 호출한 명령이 있다면
-			if (pipe_cmd_index)
-			{
-				dup2(old_fds[0], 0);
-				close(old_fds[0]);
-				close(old_fds[1]);
-			}
+			if (cmds_index)
+				dup2_and_close(pip.old_fds, 0);
 			// 다음에 호출할 명령이 있다면
-			if (data_piped[pipe_cmd_index + 1])
-			{
-				close(new_fds[0]);
-				dup2(new_fds[1], 1);
-				close(new_fds[1]);
-			}
-			dispence_command(sptr, data_piped[pipe_cmd_index]);
-			return ;
+			if (cmds_redirected[cmds_index + 1])
+				dup2_and_close(pip.new_fds, 1);
+			dispence_command(sptr, cmds_redirected[cmds_index]);
 		}
 		else
 		{
-			if (pipe_cmd_index)
-			{
-				close(old_fds[0]);
-				close(old_fds[1]);
-			}
-			if (data_piped[pipe_cmd_index + 1])
-			{
-				old_fds[0] = new_fds[0];
-				old_fds[1] = new_fds[1];
-			}
+			if (cmds_index)
+				dup2_and_close(pip.old_fds, -1);
+			if (cmds_redirected[cmds_index + 1])
+				swap_fd_value(pip.old_fds, pip.new_fds);
 		}
-		pipe_cmd_index += 1;
+		cmds_index += 1;
 	}
 	// 명령이 여러개라면
-	if (pipe_cmd_index)
-	{
-		close(old_fds[0]);
-		close(old_fds[1]);
-	}
-	if (num_pipes == 0)
-		wait(NULL);
-	else
-	{
-		pipe_count = 0;
-		// 파이프의 개수만큼
-		while (pipe_count < (num_pipes + 1))
-		{
-			wait(NULL);
-			pipe_count += 1;
-		}
-	}
-	free_double_ptr((void ***)&redir);
-	dup2(saved_stdout, STDOUT_FILENO);
-	return ;
+	if (cmds_index)
+		dup2_and_close(pip.old_fds, -1);
+	wait_loop(pip.num_pipes + 1);
 }

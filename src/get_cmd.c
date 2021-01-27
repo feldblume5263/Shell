@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:48:54 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/18 17:52:00 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/27 21:04:41 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		getcmd(char **cmd)
 
 	nl = 0;
 	ft_bzero(buf, 4097);
+	idx = 0;
 	while ((ret = read(0, buf, 4096)) > 0)
 	{
 		buf[ret] = '\0';
@@ -74,4 +75,6 @@ void		getcmd(char **cmd)
 		if (nl == 1)
 			break ;
 	}
+	if (idx == 0 && ret == 0)
+		*cmd = NULL;
 }

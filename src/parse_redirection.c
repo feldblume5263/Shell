@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:09:44 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/25 16:14:56 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/27 21:43:00 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int				parse_redirection(char ***data, char ***redir)
 {
 	char		**res;
 
-	if (count_all(*data) == 0)
+	if (data == NULL || *data == NULL || **data == NULL || ***data == '\0' ||\
+			count_all(*data) == 0)
 		return (0);
 	res = (char **)malloc(sizeof(char *) * (count_ch(*data) + 1));
 	*redir = (char **)malloc(sizeof(char *) * (count_all(*data) - count_ch(*data) + 1));

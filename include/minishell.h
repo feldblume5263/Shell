@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/25 16:10:22 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/27 22:08:06 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,27 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <signal.h>
 
 /*
 **	<stdio.h> for debugging
 */
 
 # include <stdio.h>
+
+typedef struct		s_pipe
+{
+	int				num_pipes;
+	int				new_fds[2];
+	int				old_fds[2];
+}					t_pipe;
+
+typedef struct		s_redir
+{
+	char			**in;
+	char			**out_s;
+	char			**out_d;
+}					t_redir;
 
 typedef struct		s_env
 {
@@ -52,14 +67,7 @@ typedef struct		s_shell
 	struct s_env	*env;
 }					t_shell;
 
-
-typedef struct		s_redir
-{
-	char			**in;
-	char			**out_s;
-	char			**out_d;
-}					t_redir;
-
+int					g_status;
 
 /*
 **	prompt.c
@@ -216,6 +224,12 @@ void				builtins_pwd(t_shell *sptr);
 */
 
 void				builtins_cd(t_shell *sptr, char *new_dirname);
+
+/*
+**	exit.c
+*/
+
+void				builtins_exit(t_shell *sptr, char **args);
 
 /*
 **	free.c

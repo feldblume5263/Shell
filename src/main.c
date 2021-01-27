@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/18 18:28:19 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/27 22:09:27 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int
 		// error handling - must free node data
 		printf("ERROR OCCURED - INIT ENV FAILED\n");
 	}
+	g_status = 1;
 	cmd = (char *)0;
 	prompt(&shell);
 	return (0);
