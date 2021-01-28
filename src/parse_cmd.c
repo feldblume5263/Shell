@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/27 15:33:21 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/28 15:08:46 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			free_double(char ***dptr)
 		(*dptr)[index] = NULL;
 		index += 1;
 	}
-	if (*dptr)
+	if (*dptr && **dptr)
 	{
 		free(*dptr);
 		*dptr = NULL;
@@ -59,12 +59,13 @@ void			parse_command(t_shell *sptr, char *raw)
 {
 	char		**data;
 	char		**redir;
-	// int			idx;
 	int			saved_stdout;
 	int			saved_stdin;
 
 	if (raw == NULL)
 		return ;
+	data = 0; // *수정
+	redir = 0; // *수정
 	saved_stdout = dup(STDOUT_FILENO);
 	saved_stdin = dup(STDIN_FILENO);
 	data = ft_split(raw, (char)SPACE);
@@ -75,24 +76,6 @@ void			parse_command(t_shell *sptr, char *raw)
 	dispence_command(sptr, data);
 	free_double(&data);
 	free_double(&redir);
-	// idx = -1;
-	// while (data[++idx])
-	// {
-	// 	free(data[idx]);
-	// 	data[idx] = 0;
-	// }
-	// if (data && *data)
-	// 	free(data);
-	// data = 0;
-	// idx = -1;
-	// while (redir[++idx])
-	// {
-	// 	free(redir[idx]);
-	// 	redir[idx] = 0;
-	// }
-	// if (redir && *redir)
-	// 	free(redir);
-	// redir = 0;
 	dup2(saved_stdout, STDOUT_FILENO);
 	dup2(saved_stdin, STDIN_FILENO);
 }

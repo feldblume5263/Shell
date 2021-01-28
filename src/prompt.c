@@ -6,16 +6,58 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/18 18:32:17 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/28 15:10:13 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		divide_cmds(char ***cmds, char **cmd)
+int			find_system_dup(char **data) // *수정
+{
+	int		idx;
+
+	idx = 0;
+	while (data[idx])
+	{
+		if (idx > 0 && find_redir(data[idx]) > 0)
+		{
+			if (find_redir(data[idx - 1]) > 0)
+				return (-1);
+		}
+		idx++;
+	}
+	return (1);
+}
+
+int			find_system_error(char **cmds) // *수정
+{
+	int		cmd_idx;
+	char	**data;
+
+	if (cmds == 0)
+		return (0);
+	cmd_idx = 0;
+	while (cmds[cmd_idx])
+	{
+		data  = ft_split(cmds[cmd_idx], (char)SPACE);
+		if (find_system_dup(data) < 0)
+			return (-1);
+		free_double(&data);
+		cmd_idx++;
+	}
+	return (1);
+}
+
+int			divide_cmds(char ***cmds, char **cmd)
 {
 	refine_cmd(cmd);
 	(*cmds) = ft_split(*cmd, (char)DIV);
+	if (find_system_error(*cmds) < 0) // *수정
+	{
+		write(1, "bash: syntax error near unexpected token\n", 41);
+		return (-1);
+	}
+	return (1);
 }
 
 void		print_prompt()
@@ -34,7 +76,8 @@ void		prompt(t_shell *sptr)
 	{
 		print_prompt();
 		getcmd(&cmd);
-		divide_cmds(&cmds, &cmd);
+		if (divide_cmds(&cmds, &cmd) < 0) // *수정
+			break ; // *수정
 		cmd_idx = -1;
 		while (cmds[++cmd_idx])
 		{

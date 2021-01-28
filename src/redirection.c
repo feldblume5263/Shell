@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 11:32:20 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/26 16:57:57 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/28 15:09:18 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int				redirect_out(char *redir)
 		return (-1);
 	if (find_redir(redir) > 0)
 		return (-1);
-	if ((outfd = open(outfile, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1)
+	if ((outfd = open(outfile, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1) // *수정
 		return (-1);
-	if (dup2(outfd, STDIN_FILENO) == -1)
+	if (dup2(outfd, STDOUT_FILENO) == -1)
 	{
 		close(outfd);
 		return (-1);
@@ -76,12 +76,13 @@ int				handle_redir_error(char **redir)
 	idx = 0;
 	while (redir[idx])
 	{
-		if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0)
+
+		if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0) // *수정
 		{
 			if (find_redir(redir[idx]) > 0)
 				return (-1);
 		}
-		else if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0)
+	 	else if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0) //*수정
 		{
 			if (find_redir(redir[idx]) > 0)
 				return (-1);
@@ -101,26 +102,19 @@ int				redirection(char **redir)
 	int			idx;
 	int			error_code;
 
-	if (handle_redir_error(redir) < 0)
-	{
-		write(1, "bash: syntax error near unexpected token\n", 22);
-		return (-1);
-	}
+	if (!redir)
+		return (1);
 	idx = 0;
 	while (redir[idx])
 	{
-		if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0)
-			error_code = redirect_out(redir[idx]);
-		else if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0)
+
+		if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0) // *수정
 			error_code = redirect_out_d(redir[idx]);
+		else if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0) // *수정
+			error_code = redirect_out(redir[idx]);
 		else if (idx > 0 && ft_strncmp(redir[idx - 1], "<", 1) == 0)
 			error_code = redirect_in(redir[idx]);
 		idx++;
-		if (error_code < 0)
-		{
-			write(1, "bash: syntax error near unexpected token\n", 22);
-			return (-1);
-		}
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/24 16:48:05 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/28 15:11:30 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,12 @@ void				prompt(t_shell *sptr);
 
 void				print_prompt();
 
-void				divide_cmds(char ***cmds, char **cmd);
+int					divide_cmds(char ***cmds, char **cmd);
+
+int					find_system_error(char **cmds);
+
+int					find_system_dup(char **data);
+
 
 /*
 **	refine_cmd.c
@@ -101,6 +106,8 @@ int					cmd_join(char **cmd, char *buf, int size);
 void				parse_command(t_shell *sptr, char *raw);
 
 void				dispence_command(t_shell *sptr, char **data);
+
+void				free_double(char ***dptr);
 
 
 /*
