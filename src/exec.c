@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/26 13:29:11 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/28 19:51:13 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,7 @@ int
 void
 	execute_binary(char **args)
 {
-	/*
-	pid_t			pid;
-
-	pid = fork();
-	if (pid == 0)
-	*/
-		execve(args[0], args, NULL);
-	/*
-	else
-		waitpid(pid, 0, 0);
-	*/
+	execve(args[0], args, NULL);
 }
 
 void

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:30:41 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/18 23:19:08 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/28 20:01:41 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ void			builtins_echo(t_shell *sptr, char **data)
 		print_with_opt(sptr, &(data[1]));
 	else
 		print_without_opt(sptr, data);
+	exit(0);
 }

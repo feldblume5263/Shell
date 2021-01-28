@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:00:42 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/18 18:31:17 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/28 20:02:33 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ void
 	arg_index = 0;
 	while (args && args[arg_index])
 	{
-		printf("ARG: %s\n", args[arg_index]);
-		printf("ENVADDR: %p\n", sptr->env);
-		printf("HEAD-DATA: %s\n", sptr->env->name);
 		delete_env_node(&(sptr->env), args[arg_index]);
 		arg_index += 1;
 	}
+	exit(0);
 }

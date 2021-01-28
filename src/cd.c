@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:38:37 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/12 17:17:12 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/28 20:01:23 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ void
 	ft_memset(cur_dirname, 0, PATH_MAX);
 	getcwd(cur_dirname, PATH_MAX);
 	temp->data = ft_strdup(cur_dirname);
+	exit(0);
 }
