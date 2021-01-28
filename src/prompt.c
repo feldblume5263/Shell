@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/27 22:13:38 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/28 18:55:57 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ void		prompt(t_shell *sptr)
 	char	*cmd;
 	int		cmd_idx;
 	int		saved_stdout;
+	int		saved_stdin;
 
 	saved_stdout = dup(STDOUT_FILENO);
+	saved_stdin = dup(STDIN_FILENO);
 	cmd = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
@@ -73,5 +75,6 @@ void		prompt(t_shell *sptr)
 		cmd = 0;
 		free_double_ptr((void ***)&cmds);
 		dup2(saved_stdout, STDOUT_FILENO);
+		dup2(saved_stdin, STDIN_FILENO);
 	}
 }

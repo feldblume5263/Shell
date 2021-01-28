@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/27 22:13:21 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/28 19:14:14 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ int
 	return (number_of_characters);
 }
 
+void
+	print_arr(char **arr)
+{
+	int			index = -1;
+
+	while (arr[++index])
+		printf("ARR: %s\n", arr[index]);
+}
+
 int
 	set_data_with_redirection(t_pipe *pptr, char ****cptr, const char *raw)
 {
@@ -72,8 +81,9 @@ int
 	{
 		(*cptr)[cmds_index] = ft_split(data[cmds_index], (char)SPACE);
 		parse_redirection(&(*cptr)[cmds_index], &redir);
-	 	free_double_ptr((void ***)&redir);
 		delete_subs((*cptr)[cmds_index]);
+		redirection(redir);
+	 	free_double_ptr((void ***)&redir);
 		cmds_index += 1;
 	}
 	free_double_ptr((void ***)&data);
