@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/27 22:08:06 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/28 20:14:59 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_env
 
 typedef struct		s_shell
 {
+	char			***envp;
 	struct s_env	*env;
 }					t_shell;
 

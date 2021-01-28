@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/27 22:09:27 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/28 20:15:21 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int
 	main(int argc, char **argv, char **envp)
 {
 	int				ret;
-	char			*cmd;
 	t_shell			shell;
 
 	if (argc != 1 || (ft_strncmp(argv[0], "./a.out", 7) != 0))
@@ -30,7 +29,7 @@ int
 		printf("ERROR OCCURED - INIT ENV FAILED\n");
 	}
 	g_status = 1;
-	cmd = (char *)0;
+	shell.envp = &envp;
 	prompt(&shell);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/28 19:51:13 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/28 20:17:59 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int
 }
 
 void
-	execute_binary(char **args)
+	execute_binary(t_shell *sptr, char **args)
 {
-	execve(args[0], args, NULL);
+	execve(args[0], args, *(sptr->envp));
 }
 
 void
@@ -64,7 +64,7 @@ void
 		{
 			free(args[0]);
 			args[0] = absolute;
-			execute_binary(args);
+			execute_binary(sptr, args);
 			free(command);
 			return ;
 		}
@@ -81,9 +81,8 @@ void
 void
 	exec(t_shell *sptr, char **args)
 {
-	(void)sptr;
 	if (is_path(args[0]) && is_executable_file(args[0]))
-		execute_binary(args);
+		execute_binary(sptr, args);
 	else
 		path_join(sptr, args);
 }
