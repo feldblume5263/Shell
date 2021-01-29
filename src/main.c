@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/28 20:15:21 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/29 13:38:53 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int
 		// error handling - must free node data
 		printf("ERROR OCCURED - INIT ENV FAILED\n");
 	}
+	printf("HELLO, BRANCH!\n");
 	g_status = 1;
 	shell.envp = &envp;
 	prompt(&shell);
