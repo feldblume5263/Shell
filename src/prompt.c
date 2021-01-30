@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/30 15:28:36 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/30 15:46:23 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,27 @@ int			count_add_space(char *cmd)
 	return (idx[1]);
 }
 
+void		put_others(char *cmd, char **res, int *idx, int *res_idx)
+{
+	if ((*idx) > 0 && cmd[(*idx) - 1] != (char)SPACE)
+		(*res)[++(*res_idx)] = (char)SPACE;
+	(*res)[++(*res_idx)] = cmd[(*idx)];
+	if (cmd[(*idx) + 1] && cmd[(*idx) + 1] != (char)SPACE)
+		(*res)[++(*res_idx)] = (char)SPACE;
+}
+
+void		put_redirdouble(char *cmd, char **res, int *idx, int *res_idx)
+{
+	if ((*idx) > 0 && cmd[(*idx) - 1] != (char)SPACE)
+		(*res)[++(*res_idx)] = (char)SPACE;
+	(*res)[++(*res_idx)] = cmd[(*idx)];
+	(*res)[++(*res_idx)] = cmd[(*idx) + 1];
+	if (cmd[(*idx) + 2] && cmd[(*idx) + 2] != (char)SPACE)
+		(*res)[++(*res_idx)] = (char)SPACE;
+	if (cmd[(*idx) + 1])
+		(*idx)++;
+}
+
 void		reload_line(char *cmd, char **res)
 {
 	int		idx;
@@ -88,25 +109,10 @@ void		reload_line(char *cmd, char **res)
 	{
 		if (is_closed(cmd, idx) && cmd[idx] == '>'\
 			&& cmd[idx + 1] && cmd[idx + 1] == '>')
-		{
-			if (idx > 0 && cmd[idx - 1] != (char)SPACE)
-				(*res)[++res_idx] = (char)SPACE;
-			(*res)[++res_idx] = cmd[idx];
-			(*res)[++res_idx] = cmd[idx + 1];
-			if (cmd[idx + 2] && cmd[idx + 2] != (char)SPACE)
-				(*res)[++res_idx] = (char)SPACE;
-			if (cmd[idx + 1])
-				idx++;
-		}
+			put_redirdouble(cmd, res, &idx, &res_idx);
 		else if (is_closed(cmd, idx) && (cmd[idx] == '>' ||\
 			cmd[idx] == '<' || cmd[idx] == '|'))
-		{
-			if (idx > 0 && cmd[idx - 1] != (char)SPACE)
-				(*res)[++res_idx] = (char)SPACE;
-			(*res)[++res_idx] = cmd[idx];
-			if (cmd[idx + 1] && cmd[idx + 1] != (char)SPACE)
-				(*res)[++res_idx] = (char)SPACE;
-		}
+			put_others(cmd, res, &idx, &res_idx);
 		else
 			(*res)[++res_idx] = cmd[idx];
 	}
