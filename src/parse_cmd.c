@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/30 16:06:08 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/30 18:23:48 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int
 		return (MEM_ERROR);
 	data = ft_split(raw, '|');
 	cmds_index = 0;
+	redir = 0;
 	while (cmds_index < number_of_commands)
 	{
 		(*cptr)[cmds_index] = ft_split(data[cmds_index], (char)SPACE);
@@ -129,7 +130,6 @@ void			parse_command(t_shell *sptr, char *raw)
 		builtins_exit(sptr, (char **)NULL);
 	set_data_with_redirection(&pip, &cmds_redirected, raw);
 	cmds_index = 0;
-
 	while (cmds_redirected[cmds_index])
 	{
 		// 다음으로 실행할 명령이 있다면

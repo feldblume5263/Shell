@@ -6,10 +6,9 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:09:44 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/28 17:37:11 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/30 18:21:32 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "minishell.h"
 
 int				find_redir(char *chunk)

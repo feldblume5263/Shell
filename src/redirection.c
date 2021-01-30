@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 11:32:20 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/28 19:14:05 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/30 18:24:01 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int				redirection(char **redir)
 	int			idx;
 	int			error_code;
 
-	if (!redir)
+	if (redir == (char **)NULL || *redir == (char *)NULL)
 		return (1);
 	idx = 0;
 	while (redir[idx])
