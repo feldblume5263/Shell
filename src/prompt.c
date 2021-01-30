@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/29 22:57:30 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/30 15:28:36 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			count_add_space(char *cmd)
 	idx[1] = 0;
 	while (cmd[++idx[0]])
 	{
-		if (!is_closed(cmd, idx[0]) && cmd[idx[0]] == '>'\
+		if (is_closed(cmd, idx[0]) && cmd[idx[0]] == '>'\
 			&& cmd[idx[0] + 1] && cmd[idx[0] + 1] == '>')
 		{
 			if (idx[0] > 0 && cmd[idx[0] - 1] != (char)SPACE)
@@ -65,7 +65,7 @@ int			count_add_space(char *cmd)
 				idx[1]++;
 			idx[0]++;
 		}
-		else if (!is_closed(cmd, idx[0]) && (cmd[idx[0]] == '>' ||\
+		else if (is_closed(cmd, idx[0]) && (cmd[idx[0]] == '>' ||\
 			cmd[idx[0]] == '<' || cmd[idx[0]] == '|'))
 		{
 			if (idx[0] > 0 && cmd[idx[0] - 1] != (char)SPACE)
@@ -95,7 +95,8 @@ void		reload_line(char *cmd, char **res)
 			(*res)[++res_idx] = cmd[idx + 1];
 			if (cmd[idx + 2] && cmd[idx + 2] != (char)SPACE)
 				(*res)[++res_idx] = (char)SPACE;
-			idx++;
+			if (cmd[idx + 1])
+				idx++;
 		}
 		else if (is_closed(cmd, idx) && (cmd[idx] == '>' ||\
 			cmd[idx] == '<' || cmd[idx] == '|'))
