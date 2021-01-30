@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/28 20:17:59 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/29 14:54:24 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ void
 		execute_binary(sptr, args);
 	else
 		path_join(sptr, args);
+	exit(0);
 }

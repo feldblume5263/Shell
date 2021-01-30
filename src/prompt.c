@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/28 19:59:00 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/30 16:05:20 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void
 		write(1, "\n", 1);
 		print_prompt();
 	}
-	else if (signo == SIGQUIT)
-	{
-		g_status = 0;
-	}
 }
 
 void		prompt(t_shell *sptr)
@@ -53,8 +49,8 @@ void		prompt(t_shell *sptr)
 	saved_stdout = dup(STDOUT_FILENO);
 	saved_stdin = dup(STDIN_FILENO);
 	cmd = 0;
-	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 	while (g_status)
 	{
 		print_prompt();
@@ -67,7 +63,6 @@ void		prompt(t_shell *sptr)
 		{
 			if (!(cmds[cmd_idx + 1]))
 				cmds[cmd_idx][ft_strlen(cmds[cmd_idx]) - 1] = '\0';
-			// redirection 비정상적 에러 핸들링 필요 ex) >> >> 
 			if (cmds[cmd_idx] != NULL)
 				parse_command(sptr, cmds[cmd_idx]);
 		}
