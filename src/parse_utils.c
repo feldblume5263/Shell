@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:54:58 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 16:03:07 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 19:37:00 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			remove_backslash(char **cmd)
 
 void			delete_subs(char **cmd)
 {
-	if (cmd != NULL && *cmd != NULL && **cmd == '\0')
+	if (cmd != NULL && *cmd != NULL && **cmd != '\0')
 	{
 		remove_backslash(cmd);
 		remove_quotes(cmd);
