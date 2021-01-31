@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/30 16:05:26 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 12:24:36 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ typedef struct		s_shell
 {
 	char			***envp;
 	struct s_env	*env;
+	int				saved_stdout;
+	int				saved_stdin;
+	int				exit_code;
 }					t_shell;
 
 int					g_status;
@@ -75,6 +78,10 @@ int					g_status;
 */
 
 void				prompt(t_shell *sptr);
+
+void				prepare_std(t_shell *sptr);
+
+void				restore_std(t_shell *sptr);
 
 void				print_prompt();
 
@@ -127,6 +134,30 @@ void				remove_quotes(char **cmd);
 void				get_env_sign(char **cmd);
 
 /*
+**	prepare_line.c
+*/
+
+void				insert_appro_space(char **cmd);
+
+void				reload_line(char *cmd, char **res);
+
+void				put_redirdouble(char *cmd, char **res, int *idx, int *res_idx);
+
+void				put_others(char *cmd, char **res, int *idx, int *res_idx);
+
+int					count_add_space(char *cmd);
+
+/*
+**	handle_error.c
+*/
+
+int					handle_cmd_error(char **cmds, char *cmd);
+
+int					find_system_error(char **cmds);
+
+int					find_system_dup(char **data);
+
+/*
 **	redirection.c
 */
 
@@ -169,6 +200,11 @@ int					count_ch(char **data);
 
 void				builtins_echo(t_shell *sptr, char **data);
 
+void				print_with_opt(t_shell *sptr, char **data);
+
+void				print_without_opt(t_shell *sptr, char **data);
+
+void				print_env(t_shell *sptr, char *env);
 /*
 **	init_env.c
 */
@@ -241,6 +277,8 @@ void				free_env_node(t_env *node);
 void				free_all_env(t_env *env);
 
 void				free_double_ptr(void ***dptr);
+
+void				free_ptr(char **ptr);
 
 /*
 **	exec.c
