@@ -6,7 +6,11 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:30:41 by junhpark          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/31 15:12:02 by kyeo             ###   ########.fr       */
+=======
+/*   Updated: 2021/01/31 14:22:46 by junhpark         ###   ########.fr       */
+>>>>>>> feature/handle_error
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +22,14 @@ void			print_env(t_shell *sptr, char *env)
 
 	if (!(env[1]))
 		write(1, "$", 1);
-	else if (env[1] && env[1] == '0')
+	else if (env[1] && env[1] == '?')
 	{
-		write(1, "bash", 4);
-		write(1, &(env[2]), ft_strlen(&(env[2])));
+		ft_putnbr_fd(g_status, 1);
+		if (env[2] != (char)ENV)
+			write(1, &(env[2]), ft_strlen(&(env[2])));
+		else
+			print_env(sptr, &(env[2]));
 	}
-	else if (env[1] && env[1] == (char)ENV)
-	{
-		write(1, "(PID)", 5);
-		write(1, &(env[2]), ft_strlen(&(env[2])));
-	}
-	else if (env[1] && env[1] == '#')
-	{
-		write(1, "0", 1);
-		write(1, &(env[2]), ft_strlen(&(env[2])));
-	}
-	else if (env[1] && env[1] == '*')
-		write(1, &(env[2]), ft_strlen(&(env[2])));
 	else if ((temp = find_env_by_name(sptr->env, &(env[1]))) == (t_env *)0)
 		return ;
 	else

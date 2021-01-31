@@ -6,7 +6,11 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 11:32:20 by junhpark          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/31 16:04:38 by kyeo             ###   ########.fr       */
+=======
+/*   Updated: 2021/01/30 19:17:55 by junhpark         ###   ########.fr       */
+>>>>>>> feature/handle_error
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +80,20 @@ int				handle_redir_error(char **redir)
 	idx = 0;
 	while (redir[idx])
 	{
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/handle_error
 		if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0)
 		{
 			if (find_redir(redir[idx]) > 0)
 				return (-1);
 		}
+<<<<<<< HEAD
 		else if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0)
+=======
+	 	else if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0)
+>>>>>>> feature/handle_error
 		{
 			if (find_redir(redir[idx]) > 0)
 				return (-1);

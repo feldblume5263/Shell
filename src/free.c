@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:20:17 by kyeo              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/31 16:02:26 by kyeo             ###   ########.fr       */
+=======
+/*   Updated: 2021/01/30 19:42:51 by junhpark         ###   ########.fr       */
+>>>>>>> feature/handle_error
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +53,21 @@ void
 	}
 }
 
+<<<<<<< HEAD
 void
 	free_double_ptr(void ***dptr)
+=======
+void		free_ptr(char **ptr)
+{
+	if (*ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
+void		free_double_ptr(void ***dptr)
+>>>>>>> feature/handle_error
 {
 	int			index;
 
