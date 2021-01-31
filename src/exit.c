@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 21:57:19 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/28 20:01:57 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/30 20:29:04 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void
 {
 	(void)args;
 	(void)sptr;
-	g_status = 0;
+	sptr->exit_code = 0;
 	exit(0);
 }

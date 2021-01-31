@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:20:17 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/25 16:09:26 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/30 19:42:51 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ void
 		temp = env->next;
 		free_env_node(env);
 		env = temp;
+	}
+}
+
+void		free_ptr(char **ptr)
+{
+	if (*ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
 	}
 }
 
