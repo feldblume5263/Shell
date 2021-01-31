@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 11:32:20 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/30 18:24:01 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 16:04:38 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int				redirect_out(char *redir)
 		return (-1);
 	if (find_redir(redir) > 0)
 		return (-1);
-	if ((outfd = open(outfile, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1) // *수정
+	if ((outfd = open(outfile, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1)
 		return (-1);
 	if (dup2(outfd, STDOUT_FILENO) == -1)
 	{
@@ -76,13 +76,12 @@ int				handle_redir_error(char **redir)
 	idx = 0;
 	while (redir[idx])
 	{
-
-		if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0) // *수정
+		if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0)
 		{
 			if (find_redir(redir[idx]) > 0)
 				return (-1);
 		}
-	 	else if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0) //*수정
+		else if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0)
 		{
 			if (find_redir(redir[idx]) > 0)
 				return (-1);
@@ -107,9 +106,9 @@ int				redirection(char **redir)
 	idx = 0;
 	while (redir[idx])
 	{
-		if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0) // *수정
+		if (idx > 0 && ft_strncmp(redir[idx - 1], ">>", 2) == 0)
 			error_code = redirect_out_d(redir[idx]);
-		else if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0) // *수정
+		else if (idx > 0 && ft_strncmp(redir[idx - 1], ">", 1) == 0)
 			error_code = redirect_out(redir[idx]);
 		else if (idx > 0 && ft_strncmp(redir[idx - 1], "<", 1) == 0)
 			error_code = redirect_in(redir[idx]);

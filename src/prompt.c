@@ -6,13 +6,13 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/30 16:27:30 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 16:00:14 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			find_system_dup(char **data) // *수정
+int			find_system_dup(char **data)
 {
 	int		idx;
 
@@ -29,7 +29,7 @@ int			find_system_dup(char **data) // *수정
 	return (1);
 }
 
-int			find_system_error(char **cmds) // *수정
+int			find_system_error(char **cmds)
 {
 	int		cmd_idx;
 	char	**data;
@@ -141,7 +141,7 @@ void		divide_cmds(char ***cmds, char **cmd)
 		refine_cmd(cmd);
 		insert_appro_space(cmd);
 		(*cmds) = ft_split(*cmd, (char)DIV);
-		if (find_system_error(*cmds) < 0)  // 나중에 함께 에러 처리
+		if (find_system_error(*cmds) < 0)
 			write(2, "bash: syntax error near unexpected token\n", 41);
 	}
 	else

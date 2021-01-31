@@ -6,15 +6,15 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:54:58 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/27 21:44:17 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 16:03:07 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		get_env_sign(char **cmd)
+void			get_env_sign(char **cmd)
 {
-	int		idx;
+	int			idx;
 
 	if ((*cmd)[0] && (*cmd)[0] == '$')
 		(*cmd)[0] = (char)ENV;
@@ -26,11 +26,11 @@ void		get_env_sign(char **cmd)
 	}
 }
 
-void		remove_quotes(char **cmd)
+void			remove_quotes(char **cmd)
 {
-	char	*res;
-	int		idx;
-	int		res_idx;
+	char		*res;
+	int			idx;
+	int			res_idx;
 
 	idx = 0;
 	res_idx = 0;
@@ -52,11 +52,11 @@ void		remove_quotes(char **cmd)
 	*cmd = res;
 }
 
-void		remove_backslash(char **cmd)
+void			remove_backslash(char **cmd)
 {
-	char	*res;
-	int		idx;
-	int		res_idx;
+	char		*res;
+	int			idx;
+	int			res_idx;
 
 	idx = 0;
 	res_idx = 0;

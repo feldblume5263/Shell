@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:48:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/24 14:58:50 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/31 16:01:52 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void		distinguish_semicolon(char **cmd)
 	idx = 1;
 	while ((*cmd)[idx])
 	{
-		if ((*cmd)[idx] == ';' && (*cmd)[idx - 1] != '\\' && is_closed(*cmd, idx))
+		if ((*cmd)[idx] == ';' && (*cmd)[idx - 1] != '\\' &&\
+				is_closed(*cmd, idx))
 			(*cmd)[idx] = (char)DIV;
 		idx++;
 	}

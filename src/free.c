@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:20:17 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/25 16:09:26 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 16:02:26 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void
 void
 	free_all_env(t_env *env)
 {
-	t_env			*temp;
+	t_env		*temp;
 
 	if (env == (t_env *)0)
 		return ;
@@ -49,9 +49,10 @@ void
 	}
 }
 
-void		free_double_ptr(void ***dptr)
+void
+	free_double_ptr(void ***dptr)
 {
-	int		index;
+	int			index;
 
 	index = 0;
 	while (*dptr && (*dptr)[index])

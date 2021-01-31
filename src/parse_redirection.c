@@ -6,9 +6,10 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:09:44 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/30 18:21:32 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 15:59:00 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 int				find_redir(char *chunk)
@@ -72,7 +73,8 @@ int				parse_redirection(char ***data, char ***redir)
 			count_all(*data) == 0)
 		return (0);
 	res = (char **)malloc(sizeof(char *) * (count_ch(*data) + 1));
-	*redir = (char **)malloc(sizeof(char *) * (count_all(*data) - count_ch(*data) + 1));
+	*redir = (char **)malloc(sizeof(char *) *\
+			(count_all(*data) - count_ch(*data) + 1));
 	init_redir(redir, count_all(*data) - count_ch(*data) + 1);
 	ch_without_redir(data, &res, redir);
 	return (1);

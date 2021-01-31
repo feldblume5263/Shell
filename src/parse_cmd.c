@@ -6,14 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/30 18:23:48 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 15:55:57 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void
-	dispence_command(t_shell *sptr, char **data)
+	dispence_command(t_shell *sptr, char **data, const int builtins)
 {
 	int			idx;
 
@@ -36,6 +36,22 @@ void
 		builtins_cd(sptr, data[1]);
 	else
 		exec(sptr, data);
+	if (!builtins)
+		exit(0);
+}
+
+int
+	is_builtins(char **data)
+{
+	if ((ft_strlen(data[0]) == 5 &&\
+			ft_strncmp(data[0], "unset", 5) == 0 &&\
+			data[1] != (char *)0) ||\
+		(ft_strlen(data[0]) == 6 &&\
+		 	ft_strncmp(data[0], "export", 6) == 0 &&\
+			data[1] != (char *)0) ||\
+		(ft_strlen(data[0]) == 2 && ft_strncmp(data[0], "cd", 2) == 0))
+		return (1);
+	return (0);
 }
 
 int
@@ -123,6 +139,7 @@ void			parse_command(t_shell *sptr, char *raw)
 {
 	pid_t		pid;
 	t_pipe		pip;
+	int			builtins;
 	int			cmds_index;
 	char		***cmds_redirected;
 
@@ -132,6 +149,7 @@ void			parse_command(t_shell *sptr, char *raw)
 	cmds_index = 0;
 	while (cmds_redirected[cmds_index])
 	{
+		builtins = is_builtins(cmds_redirected[cmds_index]);
 		// 다음으로 실행할 명령이 있다면
 		if (cmds_redirected[cmds_index + 1])
 			pipe(pip.new_fds);
@@ -144,7 +162,10 @@ void			parse_command(t_shell *sptr, char *raw)
 			// 다음에 호출할 명령이 있다면
 			if (cmds_redirected[cmds_index + 1])
 				dup2_and_close(pip.new_fds, 1);
-			dispence_command(sptr, cmds_redirected[cmds_index]);
+			if (!builtins)
+				dispence_command(sptr, cmds_redirected[cmds_index], builtins);
+			else
+				exit(0);
 		}
 		else
 		{
@@ -152,6 +173,8 @@ void			parse_command(t_shell *sptr, char *raw)
 				dup2_and_close(pip.old_fds, -1);
 			if (cmds_redirected[cmds_index + 1])
 				swap_fd_value(pip.old_fds, pip.new_fds);
+			if (builtins)
+				dispence_command(sptr, cmds_redirected[cmds_index], builtins);
 		}
 		cmds_index += 1;
 	}
