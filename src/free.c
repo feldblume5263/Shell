@@ -6,11 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:20:17 by kyeo              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/01/31 16:02:26 by kyeo             ###   ########.fr       */
-=======
-/*   Updated: 2021/01/30 19:42:51 by junhpark         ###   ########.fr       */
->>>>>>> feature/handle_error
+/*   Updated: 2021/01/31 17:23:25 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +49,6 @@ void
 	}
 }
 
-<<<<<<< HEAD
-void
-	free_double_ptr(void ***dptr)
-=======
 void		free_ptr(char **ptr)
 {
 	if (*ptr)
@@ -67,7 +59,6 @@ void		free_ptr(char **ptr)
 }
 
 void		free_double_ptr(void ***dptr)
->>>>>>> feature/handle_error
 {
 	int			index;
 
