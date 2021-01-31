@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:30:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/30 20:46:46 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/01/31 19:08:03 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			find_system_error(char **cmds)
 	cmd_idx = 0;
 	while (cmds[cmd_idx])
 	{
-		data  = ft_split(cmds[cmd_idx], (char)SPACE);
+		data = ft_split(cmds[cmd_idx], (char)SPACE);
 		if (find_system_dup(data) < 0)
 			return (-1);
 		free_double_ptr((void ***)&data);
