@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/31 15:56:39 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/01/31 17:03:00 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ typedef struct		s_pipe
 	int				new_fds[2];
 	int				old_fds[2];
 }					t_pipe;
+
+typedef struct		s_cmd
+{
+	int				builtins;
+	int				cmds_index;
+	pid_t			pid;
+	char			***cmds_redirected;
+	t_pipe			pip;
+}					t_cmd;
 
 typedef struct		s_redir
 {
@@ -249,5 +258,33 @@ void				free_double_ptr(void ***dptr);
 */
 
 void				exec(t_shell *sptr, char **args);
+
+/*
+**	pipe_utils.c
+*/
+
+void				swap_fd_value(int *old, int *new);
+
+void				wait_loop(const int max);
+
+void				pipe_child(t_cmd *cptr);
+
+void				pipe_parent(t_shell *sptr, t_cmd *cptr);
+
+void				pipe_end(t_pipe *pptr, const int cmds_index);
+
+/*
+**	set_cmd_data.c
+*/
+
+int					is_builtins(char **data);
+
+int					count_char_in_str(const char *string, const char c);
+
+int					set_data_with_redirection(t_pipe *pptr,\
+												char ****cptr,\
+												const char *raw);
+
+void				dup2_and_close(int *fd, const int option);
 
 #endif
