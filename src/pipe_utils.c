@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:55:56 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 01:11:03 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:17:03 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,6 @@ void
 	wait_loop(pptr->num_pipes + 1);
 	dup2_and_close(pptr->old_fds, -1);
 	dup2_and_close(pptr->new_fds, -1);
+	if (cptr->cmds_redirected[cmds_index] == 0)
+		free_double_ptr((void ***)cptr->cmds_redirected);
 }
