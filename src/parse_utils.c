@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:54:58 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 16:11:58 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 01:42:40 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void			get_env_sign(char **cmd)
 	idx = 0;
 	while ((*cmd)[++idx])
 	{
-		if ((*cmd)[idx] == '$' && (*cmd)[idx - 1] != '\\')
+		if ((*cmd)[idx] == '$' && (*cmd)[idx - 1] != '\\'\
+			&& !(is_env_closed(*cmd, idx)))
 			(*cmd)[idx] = (char)ENV;
 	}
 }
