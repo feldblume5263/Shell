@@ -6,17 +6,17 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:02:01 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 01:34:57 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 05:20:39 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int
-			is_env_closed(char *str, int idx)
+	is_env_closed(char *str, int idx)
 {
-	int			lit_q;
-	int			start;
+	int				lit_q;
+	int				start;
 
 	lit_q = 0;
 	start = 0;

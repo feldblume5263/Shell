@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:38:37 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 05:15:25 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 05:22:22 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void
 			perror("mini: cd");
 	}
 	else if (chdir(new_dirname) == -1)
-			perror("mini: cd");
+		perror("mini: cd");
 	set_dir(cur_dirname);
 	replace_pwd_data(sptr, temp, cur_dirname, "PWD");
 }

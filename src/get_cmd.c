@@ -6,13 +6,13 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:48:54 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 00:50:37 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 05:21:58 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	
+int
 	cmd_join(char **cmd, char *buf, int size)
 {
 	int		i;
