@@ -6,13 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 19:24:58 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 15:22:27 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		divide_cmds(char ***cmds, char **cmd)
+void
+	divide_cmds(char ***cmds, char **cmd)
 {
 	if (*cmd != NULL)
 	{
@@ -24,12 +25,14 @@ void		divide_cmds(char ***cmds, char **cmd)
 		*cmds = NULL;
 }
 
-void		print_prompt(void)
+void
+	print_prompt(void)
 {
 	write(1, "minishell # ", 12);
 }
 
-void		sig_handler(int signo)
+void
+	sig_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
@@ -39,7 +42,19 @@ void		sig_handler(int signo)
 	}
 }
 
-void		prompt(t_shell *sptr)
+void
+	prepare_std(t_shell *sptr)
+{
+	sptr->saved_stdout = dup(STDOUT_FILENO);
+	sptr->saved_stdin = dup(STDIN_FILENO);
+	sptr->exit_code = 1;
+	g_status = 0;
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void
+	prompt(t_shell *sptr)
 {
 	char	**cmds;
 	char	*cmd;

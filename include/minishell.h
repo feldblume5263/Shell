@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/31 19:32:59 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 15:24:12 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ void				prompt(t_shell *sptr);
 
 void				prepare_std(t_shell *sptr);
 
-void				restore_std(t_shell *sptr);
-
 void				print_prompt();
 
 void				divide_cmds(char ***cmds, char **cmd);
@@ -105,8 +103,6 @@ void				sig_handler(int signo);
 void				finish_cycle(char ***cmds, char **cmd, t_shell *sptr);
 
 void				restore_std(t_shell *sptr);
-
-void				prepare_std(t_shell *sptr);
 
 /*
 **	refine_cmd.c

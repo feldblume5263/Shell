@@ -6,13 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:22:50 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 17:02:41 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 15:24:46 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			count_add_space(char *cmd)
+int
+	count_add_space(char *cmd)
 {
 	int		idx[2];
 
@@ -41,7 +42,8 @@ int			count_add_space(char *cmd)
 	return (idx[1]);
 }
 
-void		put_others(char *cmd, char **res, int *idx, int *res_idx)
+void
+	put_others(char *cmd, char **res, int *idx, int *res_idx)
 {
 	if ((*idx) > 0 && cmd[(*idx) - 1] != (char)SPACE)
 		(*res)[++(*res_idx)] = (char)SPACE;
@@ -50,7 +52,8 @@ void		put_others(char *cmd, char **res, int *idx, int *res_idx)
 		(*res)[++(*res_idx)] = (char)SPACE;
 }
 
-void		put_redirdouble(char *cmd, char **res, int *idx, int *res_idx)
+void
+	put_redirdouble(char *cmd, char **res, int *idx, int *res_idx)
 {
 	if ((*idx) > 0 && cmd[(*idx) - 1] != (char)SPACE)
 		(*res)[++(*res_idx)] = (char)SPACE;
@@ -62,7 +65,8 @@ void		put_redirdouble(char *cmd, char **res, int *idx, int *res_idx)
 		(*idx)++;
 }
 
-void		reload_line(char *cmd, char **res)
+void
+	reload_line(char *cmd, char **res)
 {
 	int		idx;
 	int		res_idx;
@@ -83,7 +87,8 @@ void		reload_line(char *cmd, char **res)
 	(*res)[++res_idx] = '\0';
 }
 
-void		insert_appro_space(char **cmd)
+void
+	insert_appro_space(char **cmd)
 {
 	char	*res;
 	int		size;
