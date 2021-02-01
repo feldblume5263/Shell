@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 22:36:28 by kyeo             ###   ########.fr       */
+/*   Created: 2020/04/07 14:17:54 by junhpark          #+#    #+#             */
+/*   Updated: 2020/04/07 15:29:36 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int
-	main(int argc, char **argv, char **envp)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int				ret;
-	t_shell			shell;
+	t_list	*p;
 
-	if (argc != 1 || (ft_strncmp(argv[0], "minishell", 9) == 0))
-		printf("ERROR OCCURED - ARGC MUST BE 1\n");
-	if ((ret = init_env(&(shell.env), envp)) < 0)
-		printf("ERROR OCCURED - INIT ENV FAILED\n");
-	g_status = 0;
-	shell.envp = &envp;
-	prompt(&shell);
-	return (0);
+	p = ft_lstlast(*lst);
+	if (p)
+		p->next = new;
+	else
+		*lst = new;
 }

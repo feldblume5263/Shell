@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 22:36:28 by kyeo             ###   ########.fr       */
+/*   Created: 2020/02/27 17:39:23 by junhpark          #+#    #+#             */
+/*   Updated: 2020/03/07 19:07:47 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int
-	main(int argc, char **argv, char **envp)
+char	*ft_strcpy(char *dest, char *src)
 {
-	int				ret;
-	t_shell			shell;
+	int		i;
 
-	if (argc != 1 || (ft_strncmp(argv[0], "minishell", 9) == 0))
-		printf("ERROR OCCURED - ARGC MUST BE 1\n");
-	if ((ret = init_env(&(shell.env), envp)) < 0)
-		printf("ERROR OCCURED - INIT ENV FAILED\n");
-	g_status = 0;
-	shell.envp = &envp;
-	prompt(&shell);
-	return (0);
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

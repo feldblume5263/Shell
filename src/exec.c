@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 21:31:27 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 22:33:10 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,4 @@ void
 {
 	if (is_path(args[0]) && is_executable_file(args[0]))
 		execute_binary(sptr, args);
-	exit(0);
 }

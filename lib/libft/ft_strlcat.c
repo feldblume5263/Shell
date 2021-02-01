@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 22:36:28 by kyeo             ###   ########.fr       */
+/*   Created: 2020/02/27 19:35:21 by junhpark          #+#    #+#             */
+/*   Updated: 2020/04/05 15:45:49 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int
-	main(int argc, char **argv, char **envp)
+size_t		ft_strlcat(char *dest, const char *src, size_t n)
 {
-	int				ret;
-	t_shell			shell;
+	size_t		i;
+	size_t		j;
 
-	if (argc != 1 || (ft_strncmp(argv[0], "minishell", 9) == 0))
-		printf("ERROR OCCURED - ARGC MUST BE 1\n");
-	if ((ret = init_env(&(shell.env), envp)) < 0)
-		printf("ERROR OCCURED - INIT ENV FAILED\n");
-	g_status = 0;
-	shell.envp = &envp;
-	prompt(&shell);
-	return (0);
+	i = 0;
+	j = 0;
+	while (dest[i])
+		i++;
+	while (src[j] && (long int)(i + j) < (long int)(n - 1))
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	if (n != 0)
+		dest[i + j] = 0;
+	while (src[j])
+		j++;
+	return (n > i ? (i + j) : (j + n));
 }

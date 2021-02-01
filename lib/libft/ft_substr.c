@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 22:36:28 by kyeo             ###   ########.fr       */
+/*   Created: 2020/03/02 00:24:53 by junhpark          #+#    #+#             */
+/*   Updated: 2020/04/10 15:59:10 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int
-	main(int argc, char **argv, char **envp)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int				ret;
-	t_shell			shell;
+	char		*str;
+	size_t		i;
 
-	if (argc != 1 || (ft_strncmp(argv[0], "minishell", 9) == 0))
-		printf("ERROR OCCURED - ARGC MUST BE 1\n");
-	if ((ret = init_env(&(shell.env), envp)) < 0)
-		printf("ERROR OCCURED - INIT ENV FAILED\n");
-	g_status = 0;
-	shell.envp = &envp;
-	prompt(&shell);
-	return (0);
+	if (!(s))
+		return (0);
+	if (ft_strlen(s) < start)
+		return (ft_strdup(""));
+	i = 0;
+	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	while (i < len)
+	{
+		str[i] = s[start];
+		i++;
+		start++;
+	}
+	str[i] = '\0';
+	return (str);
 }

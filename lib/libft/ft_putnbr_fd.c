@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 22:36:28 by kyeo             ###   ########.fr       */
+/*   Created: 2020/03/06 19:56:54 by junhpark          #+#    #+#             */
+/*   Updated: 2020/03/26 02:28:12 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include <stdio.h>
 
-int
-	main(int argc, char **argv, char **envp)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int				ret;
-	t_shell			shell;
+	char		num;
+	long long	cp_n;
 
-	if (argc != 1 || (ft_strncmp(argv[0], "minishell", 9) == 0))
-		printf("ERROR OCCURED - ARGC MUST BE 1\n");
-	if ((ret = init_env(&(shell.env), envp)) < 0)
-		printf("ERROR OCCURED - INIT ENV FAILED\n");
-	g_status = 0;
-	shell.envp = &envp;
-	prompt(&shell);
-	return (0);
+	cp_n = (long long)n;
+	if (cp_n < 0)
+	{
+		write(fd, "-", 1);
+		cp_n *= (-1);
+	}
+	if (cp_n >= 0)
+	{
+		if (cp_n >= 10)
+			ft_putnbr_fd((int)(cp_n / 10), fd);
+		num = (cp_n % 10) + 48;
+	}
+	write(fd, &num, 1);
 }
