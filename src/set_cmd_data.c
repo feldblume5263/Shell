@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:57:45 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/31 16:58:19 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 16:11:35 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int
 	{
 		(*cptr)[cmds_index] = ft_split(data[cmds_index], (char)SPACE);
 		parse_redirection(&(*cptr)[cmds_index], &redir);
-		delete_subs((*cptr)[cmds_index]);
+		// delete_subs((*cptr)[cmds_index]);
 		redirection(redir);
 		free_double_ptr((void ***)&redir);
 		cmds_index += 1;

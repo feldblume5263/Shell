@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:30:41 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 17:22:24 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 16:20:58 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void			print_with_opt(t_shell *sptr, char **data)
 
 void			builtins_echo(t_shell *sptr, char **data)
 {
-	delete_subs(&(data[0]));
 	if (ft_strlen(data[0]) == 2 && ft_strncmp(data[0], "-n", 2) == 0)
 		print_with_opt(sptr, &(data[1]));
 	else

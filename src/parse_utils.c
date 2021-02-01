@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:54:58 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 19:37:00 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 16:11:58 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void			remove_backslash(char **cmd)
 		{
 			res[res_idx] = (*cmd)[idx];
 			res_idx++;
+			idx++;
 		}
-		idx++;
 	}
 	res[res_idx] = '\0';
 	free(*cmd);
