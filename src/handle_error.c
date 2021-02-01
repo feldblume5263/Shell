@@ -6,13 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:30:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 15:39:29 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 16:48:35 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			find_system_dup(char **data)
+int
+	find_system_dup(char **data)
 {
 	int		idx;
 
@@ -34,7 +35,8 @@ int			find_system_dup(char **data)
 	return (1);
 }
 
-int			find_system_error(char **cmds)
+int
+	find_system_error(char **cmds)
 {
 	int		cmd_idx;
 	char	**data;
@@ -52,12 +54,13 @@ int			find_system_error(char **cmds)
 	return (1);
 }
 
-int			handle_cmd_error(char **cmds, char *cmd)
+int
+	handle_cmd_error(char **cmds, char *cmd)
 {
 	(void)cmd;
 	if (find_system_error(cmds) < 0)
 	{
-		write(2, "bash: syntax error near unexpected token\n", 41);
+		write(2, "mini: syntax error near unexpected token\n", 41);
 		g_status = 258;
 		return (-1);
 	}
