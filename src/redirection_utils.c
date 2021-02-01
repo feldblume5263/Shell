@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 11:12:19 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 01:10:14 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 01:28:52 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void
 				cmds[cmd_idx][idx] = '<';
 			else if (cmds[cmd_idx][idx]  == (char)PIPE)
 				cmds[cmd_idx][idx] = '|';
+			else if (cmds[cmd_idx][idx]  == (char)BSLASH)
+				cmds[cmd_idx][idx] = '\\';
 		}
 	}
 }

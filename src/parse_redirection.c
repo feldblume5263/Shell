@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:09:44 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 01:08:09 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 01:27:45 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ void			change_redir(char **cmd)
 			if (idx > 0 && (*cmd)[idx - 1] == '\\')
 				(*cmd)[idx] = (char)RDRIN;
 		}
-		else  if ((*cmd)[idx] == '|')
+		else if ((*cmd)[idx] == '|')
 		{
 			if (idx > 0 && (*cmd)[idx - 1] == '\\')
 				(*cmd)[idx] =  (char)PIPE;
+		}
+		else if ((*cmd)[idx] == '\\')
+		{
+			if (idx > 0 && (*cmd)[idx - 1] == '\\')
+				(*cmd)[idx] =  (char)BSLASH;
 		}
 		idx++;
 	}
