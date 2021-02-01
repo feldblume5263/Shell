@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:30:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 19:08:03 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 15:39:29 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int			find_system_dup(char **data)
 			if (find_redir(data[idx - 1]) > 0)
 				return (-1);
 		}
+		if (!data[idx + 1])
+		{
+			if (find_redir(data[idx]) > 0)
+				return (-1);
+		}
 		idx++;
 	}
 	return (1);
@@ -36,14 +41,13 @@ int			find_system_error(char **cmds)
 
 	if (cmds == 0)
 		return (0);
-	cmd_idx = 0;
-	while (cmds[cmd_idx])
+	cmd_idx = -1;
+	while (cmds[++cmd_idx])
 	{
 		data = ft_split(cmds[cmd_idx], (char)SPACE);
 		if (find_system_dup(data) < 0)
 			return (-1);
 		free_double_ptr((void ***)&data);
-		cmd_idx++;
 	}
 	return (1);
 }
