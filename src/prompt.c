@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 01:24:12 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 01:38:54 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,7 @@ void
 		while (cmds && cmds[++cmd_idx])
 		{
 			if (cmds[cmd_idx] != NULL)
-			{
-				// printf("\n");
 				parse_command(sptr, cmds[cmd_idx]);
-			}
 		}
 		finish_cycle(&cmds, &cmd, sptr);
 	}
