@@ -6,13 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:48:54 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/27 21:04:41 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 00:50:37 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			cmd_join(char **cmd, char *buf, int size)
+int	
+	cmd_join(char **cmd, char *buf, int size)
 {
 	int		i;
 	int		j;
@@ -39,7 +40,8 @@ int			cmd_join(char **cmd, char *buf, int size)
 	return (1);
 }
 
-int			make_cmd(char buf[], char **cmd)
+int
+	make_cmd(char buf[], char **cmd)
 {
 	int		size;
 
@@ -51,7 +53,8 @@ int			make_cmd(char buf[], char **cmd)
 	return (size);
 }
 
-void		getcmd(char **cmd)
+void
+	getcmd(char **cmd)
 {
 	int		ret;
 	char	buf[4096 + 1];

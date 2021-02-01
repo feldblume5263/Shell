@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 20:11:08 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 00:54:44 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void
 	int		cmd_idx;
 
 	cmd = 0;
+	cmds = 0;
 	prepare_std(sptr);
 	while (sptr->exit_code)
 	{

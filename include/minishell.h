@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 21:51:23 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:09:28 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,7 @@ void				free_double_ptr(void ***dptr);
 
 void				free_ptr(char **ptr);
 
-void				free_path_data(t_path *path_ptr);
+void				free_path_data(t_path *path_ptr, const int option);
 
 /*
 **	path.c
@@ -355,7 +355,7 @@ void				pipe_child(t_cmd *cptr);
 
 void				pipe_parent(t_shell *sptr, t_cmd *cptr);
 
-void				pipe_end(t_pipe *pptr, const int cmds_index);
+void				pipe_end(t_cmd *cptr, t_pipe *pptr, const int cmds_index);
 
 /*
 **	set_cmd_data.c
