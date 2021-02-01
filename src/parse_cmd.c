@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 01:16:07 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:55:54 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,19 @@ void
 }
 
 void
+	init_cdata(t_cmd *dptr)
+{
+	dptr->cmds_redirected = 0;
+	dptr->cmds_index = -1;
+}
+
+void
 	parse_command(t_shell *sptr, char *raw)
 {
 	t_cmd		cdata;
 
+	init_cdata(&cdata);
 	set_data_with_redirection(&(cdata.pip), &(cdata.cmds_redirected), raw);
-	cdata.cmds_index = -1;
 	while (cdata.cmds_redirected[++cdata.cmds_index])
 	{
 		cdata.builtins = is_builtins(cdata.cmds_redirected[cdata.cmds_index]);

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:57:45 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 00:40:28 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:55:24 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int
 	if ((*cptr = malloc(sizeof(char **) * (number_of_commands + 1))) == NULL)
 		return (MEM_ERROR);
 	data = ft_split(raw, '|');
-	cmds_index = -1;
 	redir = 0;
+	cmds_index = -1;
 	while (++cmds_index < number_of_commands)
 	{
 		(*cptr)[cmds_index] = ft_split(data[cmds_index], (char)SPACE);
