@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 16:54:39 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 20:20:57 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define SPACE					130
 # define DIV					131
 # define ENV					132
+# define RDROUT					133
+# define RDRIN					134
 
 # define CMD_NOT_FOUND			"command not found\n"
 # define CMD_NOT_FOUND_SIZE		18
@@ -206,6 +208,8 @@ void				ch_without_redir(char ***data, char ***res, char ***redir);
 void				get_redir(char *red, char ***res);
 
 int					find_redir(char *chunk);
+
+void				change_redir(char **cmd);
 
 
 /*

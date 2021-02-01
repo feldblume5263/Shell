@@ -6,11 +6,32 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:09:44 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 15:59:00 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 20:20:26 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void			change_redir(char **cmd)
+{
+	int			idx;
+
+	idx = 0;
+	while ((*cmd)[idx])
+	{
+		if ((*cmd)[idx] == '>')
+		{
+			if (idx > 0 && (*cmd)[idx - 1] == '\\')
+				(*cmd)[idx] = (char)RDROUT;
+		}
+		else if ((*cmd)[idx] == '<')
+		{
+			if (idx > 0 && (*cmd)[idx - 1] == '\\')
+				(*cmd)[idx] = (char)RDRIN;
+		}
+		idx++;
+	}
+}
 
 int				find_redir(char *chunk)
 {

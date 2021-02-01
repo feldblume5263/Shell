@@ -6,11 +6,32 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:57:45 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 20:35:46 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 20:49:12 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void
+	remake_redir(char **cmds)
+{
+	int			cmd_idx;
+	int			idx;
+
+	cmd_idx = -1;
+
+	while (cmds[++cmd_idx])
+	{
+		idx = -1;
+		while (cmds[cmd_idx][++idx])
+		{
+			if (cmds[cmd_idx][idx] == (char)RDROUT)
+				cmds[cmd_idx][idx] = '>';
+			else if (cmds[cmd_idx][idx] == (char)RDRIN)
+				cmds[cmd_idx][idx] = '<';
+		}
+	}
+}
 
 int
 	is_builtins(char **data)
@@ -79,6 +100,7 @@ int
 		(*cptr)[cmds_index] = ft_split(data[cmds_index], (char)SPACE);
 		parse_redirection(&(*cptr)[cmds_index], &redir);
 		redirection(redir);
+		remake_redir((*cptr)[cmds_index]);
 		delete_sub_in_cmd((*cptr)[cmds_index]);
 		free_double_ptr((void ***)&redir);
 		cmds_index += 1;

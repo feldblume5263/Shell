@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 17:01:27 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 20:11:08 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void
 	if (*cmd != NULL)
 	{
 		refine_cmd(cmd);
+		change_redir(cmd);
 		insert_appro_space(cmd);
 		(*cmds) = ft_split(*cmd, (char)DIV);
 	}
