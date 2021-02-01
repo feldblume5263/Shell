@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 01:55:54 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 02:34:41 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void
 	else if (ft_strlen(data[0]) == 2 && ft_strncmp(data[0], "cd", 2) == 0)
 		builtins_cd(sptr, data[1]);
 	else if (ft_strlen(data[0]) == 4 && ft_strncmp(data[0], "exit", 4) == 0)
-		builtins_exit(sptr, (char **)0);
+		builtins_exit(sptr, data);
 	else
 		exec(sptr, data);
 	if (builtins == 0 || builtins == 2)

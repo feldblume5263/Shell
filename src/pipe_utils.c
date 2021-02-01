@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:55:56 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 01:55:00 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 03:57:58 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@ void
 	wait_loop(const int max)
 {
 	int			count;
+	int			status;
 
 	count = 0;
 	while (count < max)
 	{
-		wait(NULL);
+		wait(&status);
+		if (status == 256)
+			g_status = 2;
+		else
+			g_status = 0;
 		count += 1;
 	}
 }

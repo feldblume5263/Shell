@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 22:33:10 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 03:53:45 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void
 void
 	execute_binary(t_shell *sptr, char **args)
 {
-	execve(args[0], args, *(sptr->envp));
+	if (execve(args[0], args, *(sptr->envp)) == -1)
+		exit(2);
 }
 
 void
