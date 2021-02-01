@@ -6,32 +6,11 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:23:27 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 01:14:01 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 06:08:35 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int
-	is_path(const char *command)
-{
-	if (ft_strncmp(command, "./", 2) == 0 ||\
-		ft_strncmp(command, "../", 3) == 0 ||\
-		ft_strncmp(command, "/", 1) == 0)
-		return (1);
-	return (0);
-}
-
-int
-	is_executable_file(const char *command)
-{
-	struct stat		buf;
-
-	stat(command, &buf);
-	if (S_ISREG(buf.st_mode) && (S_IXUSR & buf.st_mode))
-		return (1);
-	return (0);
-}
 
 void
 	init_path_data(t_path *path_ptr)
@@ -71,8 +50,7 @@ void
 		set_absolute_path(&path, args);
 		if (is_executable_file(path.absolute))
 		{
-			free(args[0]);
-			args[0] = ft_strdup(path.absolute);
+			free_and_change_to_dup(args, 0, path.absolute);
 			break ;
 		}
 		else if (!is_executable_file(path.absolute) &&\

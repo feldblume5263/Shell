@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 05:19:03 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 06:10:54 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,12 +333,20 @@ void				free_ptr(char **ptr);
 void				free_path_data(t_path *path_ptr, const int option);
 
 /*
-**	path.c
+**	path_utils.c
 */
 
 int					is_path(const char *command);
 
 int					is_executable_file(const char *command);
+
+void				free_and_change_to_dup(char **args,\
+											const int arg_index,\
+											const char *new);
+
+/*
+**	path.c
+*/
 
 void				init_path_data(t_path *path_ptr);
 
