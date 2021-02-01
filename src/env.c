@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:02:01 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/31 19:07:24 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:34:57 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int
+			is_env_closed(char *str, int idx)
+{
+	int			lit_q;
+	int			start;
+
+	lit_q = 0;
+	start = 0;
+	while (str[start] && start < idx)
+	{
+		if (str[start] == (char)LIT_Q)
+			lit_q++;
+		start++;
+	}
+	if (lit_q % 2 == 0)
+		return (1);
+	else
+		return (0);
+}
 
 void
 	connect_new_env_node(t_env **new, t_env **eptr)

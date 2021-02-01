@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 01:27:37 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 01:35:32 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,8 @@ int					init_env(t_env **head, char **envp);
 void				connect_new_env_node(t_env **new, t_env **eptr);
 
 void				builtins_env(t_env *eptr, const int export_option);
+
+int					is_env_closed(char *str, int idx);
 
 /*
 **	unset.c
