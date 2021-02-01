@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 20:11:08 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 01:03:02 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void
 	int		cmd_idx;
 
 	cmd = 0;
+	cmds = 0;
 	prepare_std(sptr);
 	while (sptr->exit_code)
 	{
@@ -77,8 +78,13 @@ void
 		}
 		cmd_idx = -1;
 		while (cmds && cmds[++cmd_idx])
+		{
 			if (cmds[cmd_idx] != NULL)
+			{
+				// printf("\n");
 				parse_command(sptr, cmds[cmd_idx]);
+			}
+		}
 		finish_cycle(&cmds, &cmd, sptr);
 	}
 }

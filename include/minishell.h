@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 21:51:23 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:03:25 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ENV					132
 # define RDROUT					133
 # define RDRIN					134
+# define PIPE					135
 
 # define CMD_NOT_FOUND			"command not found\n"
 # define CMD_NOT_FOUND_SIZE		18
