@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:57:45 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 17:00:18 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 20:35:46 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int
 	else if ((ft_strlen(data[0]) == 4 && ft_strncmp(data[0], "echo", 4) == 0)\
 	|| ((ft_strlen(data[0]) == 3 && ft_strncmp(data[0], "env", 3) == 0)) ||\
 	((ft_strlen(data[0]) == 3 && ft_strncmp(data[0], "pwd", 3) == 0)))
-		return (1);
+		return (2);
 	return (0);
 }
 
@@ -44,6 +44,19 @@ int
 		index += 1;
 	}
 	return (number_of_characters);
+}
+
+void
+	delete_sub_in_cmd(char **data)
+{
+	int			index;
+
+	index = 0;
+	while (data[index])
+	{
+		delete_subs(&(data[index]));
+		index += 1;
+	}
 }
 
 int
@@ -66,6 +79,7 @@ int
 		(*cptr)[cmds_index] = ft_split(data[cmds_index], (char)SPACE);
 		parse_redirection(&(*cptr)[cmds_index], &redir);
 		redirection(redir);
+		delete_sub_in_cmd((*cptr)[cmds_index]);
 		free_double_ptr((void ***)&redir);
 		cmds_index += 1;
 	}

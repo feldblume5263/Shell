@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 17:36:30 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 18:47:06 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,18 @@ void
 		{
 			free(args[0]);
 			args[0] = absolute;
-			if (command)
-				free(command);
+			free_ptr(&command);
 			return ;
 		}
 		else if (!is_executable_file(absolute) && !(paths[path_index + 1]))
 		{
 			print_command_error(args[0], 1);
-			free(command);
-			free(absolute);
+			free_ptr(&command);
+			free_ptr(&absolute);
 			return ;
 		}
-		free(command);
-		free(absolute);
+		free_ptr(&command);
+		free_ptr(&absolute);
 		path_index += 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 17:35:49 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 20:36:38 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 void
 	dispence_command(t_shell *sptr, char **data, const int builtins)
 {
-	int			idx;
-
-	idx = 0;
-	if (!(data[idx]))
-		return ;
-	while (data[++idx])
-		delete_subs(&(data[idx]));
 	if (ft_strlen(data[0]) == 4 && ft_strncmp(data[0], "echo", 4) == 0)
 		builtins_echo(sptr, &(data[1]));
 	else if (ft_strlen(data[0]) == 3 && ft_strncmp(data[0], "env", 3) == 0)
