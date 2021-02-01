@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:48:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 16:01:52 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:20:23 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,15 @@ void		revive_quotes(char **cmd)
 		else if ((*cmd)[idx] == (char)LIT_Q && !(is_closed(cmd_dup, idx)))
 			(*cmd)[idx] = '\'';
 		if ((*cmd)[idx] == '"' && (is_closed(cmd_dup, idx + 1)))
-			(*cmd)[idx] = (char)BIG_Q;
+		{
+			if (idx == 0 || (idx > 0 && (*cmd)[idx - 1] != '\\'))
+				(*cmd)[idx] = (char)BIG_Q;
+		}
 		else if ((*cmd)[idx] == '\'' && (is_closed(cmd_dup, idx + 1)))
-			(*cmd)[idx] = (char)LIT_Q;
+		{
+			if (idx == 0 || (idx > 0 && (*cmd)[idx - 1] != '\\'))
+				(*cmd)[idx] = (char)LIT_Q;
+		}
 		idx++;
 	}
 	free(cmd_dup);
