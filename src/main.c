@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:20:48 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/31 19:25:27 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 22:16:11 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int
 	int				ret;
 	t_shell			shell;
 
-	if (argc != 1 || (ft_strncmp(argv[0], "./a.out", 7) != 0))
+	if (argc != 1 || (ft_strncmp(argv[0], "minishell", 7) != 0))
 		printf("ERROR OCCURED - ARGC MUST BE 1\n");
 	if ((ret = init_env(&(shell.env), envp)) < 0)
 		printf("ERROR OCCURED - INIT ENV FAILED\n");
