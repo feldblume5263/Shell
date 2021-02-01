@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 20:36:38 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 21:44:18 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void
 		builtins_exit(sptr, (char **)0);
 	else
 		exec(sptr, data);
-	if (!builtins)
+	if (builtins == 0 || builtins == 2)
 		exit(0);
 }
 
@@ -41,11 +41,11 @@ void
 	t_cmd		cdata;
 
 	set_data_with_redirection(&(cdata.pip), &(cdata.cmds_redirected), raw);
-	cdata.cmds_index = 0;
-	while (cdata.cmds_redirected[cdata.cmds_index])
+	cdata.cmds_index = -1;
+	while (cdata.cmds_redirected[++cdata.cmds_index])
 	{
 		cdata.builtins = is_builtins(cdata.cmds_redirected[cdata.cmds_index]);
-		if (!cdata.builtins)
+		if (cdata.builtins == 0)
 			path_join(sptr, cdata.cmds_redirected[cdata.cmds_index]);
 		if (cdata.cmds_redirected[cdata.cmds_index + 1])
 			pipe(cdata.pip.new_fds);
@@ -53,7 +53,7 @@ void
 		if (cdata.pid == 0)
 		{
 			pipe_child(&cdata);
-			if (!cdata.builtins)
+			if (cdata.builtins != 1)
 				dispence_command(sptr, cdata.cmds_redirected[cdata.cmds_index],\
 						cdata.builtins);
 			else
@@ -61,7 +61,6 @@ void
 		}
 		else
 			pipe_parent(sptr, &cdata);
-		cdata.cmds_index += 1;
 	}
 	pipe_end(&(cdata.pip), cdata.cmds_index);
 }

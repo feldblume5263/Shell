@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 20:20:57 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 21:51:23 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ typedef struct		s_env
 	struct s_env	*prev;
 }					t_env;
 
+typedef struct		s_path
+{
+	int				index;
+	char			*command;
+	char			*absolute;
+	char			**data;
+	t_env			*env;
+}					t_path;
+
 typedef struct		s_shell
 {
 	char			***envp;
@@ -133,7 +142,6 @@ int					make_cmd(char buf[], char **cmd);
 
 int					cmd_join(char **cmd, char *buf, int size);
 
-
 /*
 **	parse_cmd.c
 */
@@ -143,7 +151,6 @@ void				parse_command(t_shell *sptr, char *raw);
 void				dispence_command(t_shell *sptr,\
 										char **data,\
 										const int builtins);
-
 
 /*
 **	parse_utils.c
@@ -167,7 +174,8 @@ void				insert_appro_space(char **cmd);
 
 void				reload_line(char *cmd, char **res);
 
-void				put_redirdouble(char *cmd, char **res, int *idx, int *res_idx);
+void				put_redirdouble(char *cmd, char **res,\
+									int *idx, int *res_idx);
 
 void				put_others(char *cmd, char **res, int *idx, int *res_idx);
 
@@ -211,10 +219,11 @@ int					find_redir(char *chunk);
 
 void				change_redir(char **cmd);
 
-
 /*
 **	redirection_utils.c
 */
+
+void				remake_redir(char **cmds);
 
 void				init_redir(char ***redir, int size);
 
@@ -308,11 +317,29 @@ void				free_double_ptr(void ***dptr);
 
 void				free_ptr(char **ptr);
 
+void				free_path_data(t_path *path_ptr);
+
+/*
+**	path.c
+*/
+
+int					is_path(const char *command);
+
+int					is_executable_file(const char *command);
+
+void				init_path_data(t_path *path_ptr);
+
+void				set_absolute_path(t_path *path_ptr, char **args);
+
+void				path_join(t_shell *sptr, char **args);
+
 /*
 **	exec.c
 */
 
-void				path_join(t_shell *sptr, char **args);
+void				print_command_error(const char *cmd, const int type);
+
+void				execute_binary(t_shell *sptr, char **args);
 
 void				exec(t_shell *sptr, char **args);
 

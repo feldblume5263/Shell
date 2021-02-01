@@ -6,32 +6,11 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:57:45 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 20:49:12 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 21:49:13 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void
-	remake_redir(char **cmds)
-{
-	int			cmd_idx;
-	int			idx;
-
-	cmd_idx = -1;
-
-	while (cmds[++cmd_idx])
-	{
-		idx = -1;
-		while (cmds[cmd_idx][++idx])
-		{
-			if (cmds[cmd_idx][idx] == (char)RDROUT)
-				cmds[cmd_idx][idx] = '>';
-			else if (cmds[cmd_idx][idx] == (char)RDRIN)
-				cmds[cmd_idx][idx] = '<';
-		}
-	}
-}
 
 int
 	is_builtins(char **data)
@@ -45,7 +24,11 @@ int
 		return (1);
 	else if ((ft_strlen(data[0]) == 4 && ft_strncmp(data[0], "echo", 4) == 0)\
 	|| ((ft_strlen(data[0]) == 3 && ft_strncmp(data[0], "env", 3) == 0)) ||\
-	((ft_strlen(data[0]) == 3 && ft_strncmp(data[0], "pwd", 3) == 0)))
+	((ft_strlen(data[0]) == 3 && ft_strncmp(data[0], "pwd", 3) == 0)) ||\
+	((ft_strlen(data[0]) == 6 && ft_strncmp(data[0], "export", 6) == 0 &&\
+	!data[1])) ||\
+	(ft_strlen(data[0]) == 5 && ft_strncmp(data[0], "unset", 5) == 0 &&\
+	!data[1]))
 		return (2);
 	return (0);
 }
@@ -93,9 +76,9 @@ int
 	if ((*cptr = malloc(sizeof(char **) * (number_of_commands + 1))) == NULL)
 		return (MEM_ERROR);
 	data = ft_split(raw, '|');
-	cmds_index = 0;
+	cmds_index = -1;
 	redir = 0;
-	while (cmds_index < number_of_commands)
+	while (++cmds_index < number_of_commands)
 	{
 		(*cptr)[cmds_index] = ft_split(data[cmds_index], (char)SPACE);
 		parse_redirection(&(*cptr)[cmds_index], &redir);
@@ -103,7 +86,6 @@ int
 		remake_redir((*cptr)[cmds_index]);
 		delete_sub_in_cmd((*cptr)[cmds_index]);
 		free_double_ptr((void ***)&redir);
-		cmds_index += 1;
 	}
 	free_double_ptr((void ***)&data);
 	if (number_of_commands == cmds_index)

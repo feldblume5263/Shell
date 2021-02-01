@@ -6,13 +6,34 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 11:12:19 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/24 11:13:03 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 21:50:21 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				count_ch(char **data)
+void
+	remake_redir(char **cmds)
+{
+	int			cmd_idx;
+	int			idx;
+
+	cmd_idx = -1;
+	while (cmds[++cmd_idx])
+	{
+		idx = -1;
+		while (cmds[cmd_idx][++idx])
+		{
+			if (cmds[cmd_idx][idx] == (char)RDROUT)
+				cmds[cmd_idx][idx] = '>';
+			else if (cmds[cmd_idx][idx] == (char)RDRIN)
+				cmds[cmd_idx][idx] = '<';
+		}
+	}
+}
+
+int
+	count_ch(char **data)
 {
 	int			cmd_i;
 	int			count;
@@ -31,7 +52,8 @@ int				count_ch(char **data)
 	return (count);
 }
 
-int				count_all(char **data)
+int
+	count_all(char **data)
 {
 	int			idx;
 
@@ -41,7 +63,8 @@ int				count_all(char **data)
 	return (idx);
 }
 
-void			init_redir(char ***redir, int size)
+void
+	init_redir(char ***redir, int size)
 {
 	int			idx;
 

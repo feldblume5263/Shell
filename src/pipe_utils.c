@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:55:56 by kyeo              #+#    #+#             */
-/*   Updated: 2021/01/31 17:03:20 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 21:36:54 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void
 		dup2_and_close(cptr->pip.old_fds, -1);
 	if (cptr->cmds_redirected[cptr->cmds_index + 1])
 		swap_fd_value(cptr->pip.old_fds, cptr->pip.new_fds);
-	if (cptr->builtins)
+	if (cptr->builtins == 1)
 		dispence_command(sptr, cptr->cmds_redirected[cptr->cmds_index],\
 				cptr->builtins);
 }
