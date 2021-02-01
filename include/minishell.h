@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 03:43:06 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 05:19:03 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,15 @@ void				builtins_pwd(t_shell *sptr);
 /*
 **	cd.c
 */
+
+void				replace_pwd_data(t_shell *sptr,\
+										t_env *temp,\
+										const char *new_dir,\
+										const char *pwd_type);
+
+void				set_dir(char *dir);
+
+int					change_old_and_cur(t_shell *sptr, const char *new_dirname);
 
 void				builtins_cd(t_shell *sptr, char *new_dirname);
 
