@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:30:41 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 16:20:58 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/01 17:48:12 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void			print_env(t_shell *sptr, char *env)
 	else if (env[1] && env[1] == '?')
 	{
 		ft_putnbr_fd(g_status, 1);
+		g_status = 0;
 		if (env[2] != (char)ENV)
 			write(1, &(env[2]), ft_strlen(&(env[2])));
 		else

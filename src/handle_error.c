@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:30:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 16:48:35 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 17:51:43 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int
 	if (find_system_error(cmds) < 0)
 	{
 		write(2, "mini: syntax error near unexpected token\n", 41);
-		g_status = 258;
+		g_status = 2;
 		return (-1);
 	}
 	return (1);

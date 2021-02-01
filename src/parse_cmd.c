@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 17:01:20 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 17:35:49 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void
 	while (cdata.cmds_redirected[cdata.cmds_index])
 	{
 		cdata.builtins = is_builtins(cdata.cmds_redirected[cdata.cmds_index]);
+		if (!cdata.builtins)
+			path_join(sptr, cdata.cmds_redirected[cdata.cmds_index]);
 		if (cdata.cmds_redirected[cdata.cmds_index + 1])
 			pipe(cdata.pip.new_fds);
 		cdata.pid = fork();

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 15:22:27 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 17:01:27 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ void
 			if (cmds[cmd_idx] != NULL)
 				parse_command(sptr, cmds[cmd_idx]);
 		finish_cycle(&cmds, &cmd, sptr);
-		g_status = 0;
 	}
 }
