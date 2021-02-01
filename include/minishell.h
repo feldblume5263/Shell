@@ -6,24 +6,29 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 15:24:12 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/01 16:54:39 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define SHELL_NAME			"minishell"
-# define SHELL_NAME_LENGTH	9
+# define SHELL_NAME				"minishell"
+# define SHELL_NAME_LENGTH		9
 
-# define ARG_ERROR			-1
-# define MEM_ERROR			-2
+# define ARG_ERROR				-1
+# define MEM_ERROR				-2
 
-# define BIG_Q				128
-# define LIT_Q				129
-# define SPACE				130
-# define DIV				131
-# define ENV				132
+# define BIG_Q					128
+# define LIT_Q					129
+# define SPACE					130
+# define DIV					131
+# define ENV					132
+
+# define CMD_NOT_FOUND			"command not found\n"
+# define CMD_NOT_FOUND_SIZE		18
+# define NO_FILE_OR_DIR			"No such file or directory\n"
+# define NO_FILE_OR_DIR_SIZE	27
 
 # include "libft.h"
 # include <limits.h>
@@ -302,6 +307,8 @@ void				free_ptr(char **ptr);
 /*
 **	exec.c
 */
+
+void				path_join(t_shell *sptr, char **args);
 
 void				exec(t_shell *sptr, char **args);
 
