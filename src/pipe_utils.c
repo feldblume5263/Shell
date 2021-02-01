@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:55:56 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 21:36:54 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:11:03 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void
 }
 
 void
-	pipe_end(t_pipe *pptr, const int cmds_index)
+	pipe_end(t_cmd *cptr, t_pipe *pptr, const int cmds_index)
 {
 	if (cmds_index)
 		dup2_and_close(pptr->old_fds, -1);

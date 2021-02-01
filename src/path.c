@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:23:27 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 22:32:58 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 01:14:01 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void
 			print_command_error(args[0], 1);
 			break ;
 		}
+		free_path_data(&path, 0);
 	}
-	free_path_data(&path);
+	free_path_data(&path, 1);
 }

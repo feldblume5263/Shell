@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:20:17 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/01 21:26:40 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 00:56:44 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ void
 }
 
 void
-	free_path_data(t_path *path_ptr)
+	free_path_data(t_path *path_ptr, const int option)
 {
 	free_ptr(&(path_ptr->command));
 	free_ptr(&(path_ptr->absolute));
-	free_double_ptr((void ***)&(path_ptr->data));
+	if (option)
+		free_double_ptr((void ***)&(path_ptr->data));
 }
