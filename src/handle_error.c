@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:30:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/01 17:51:43 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 00:57:28 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,19 @@ int
 {
 	int		idx;
 
-	idx = 0;
-	while (data[idx])
+	idx = -1;
+	while (data[++idx])
 	{
 		if (idx > 0 && find_redir(data[idx]) > 0)
 		{
 			if (find_redir(data[idx - 1]) > 0)
+				return (-1);
+		}
+		if (data[idx][0] == '|')
+		{
+			if (idx == 0)
+				return (-1);
+			else if (!(data[idx + 1]))
 				return (-1);
 		}
 		if (!data[idx + 1])
@@ -30,7 +37,6 @@ int
 			if (find_redir(data[idx]) > 0)
 				return (-1);
 		}
-		idx++;
 	}
 	return (1);
 }
