@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 10:59:23 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 12:58:55 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,24 @@ void
 }
 
 void
+	launch_cmd(char **cmds, t_shell *sptr)
+{
+	int		cmd_idx;
+
+	cmd_idx = -1;
+	while (cmds && cmds[++cmd_idx])
+	{
+		if (cmds[cmd_idx] != NULL)
+			parse_command(sptr, cmds[cmd_idx]);
+	}
+}
+
+void
 	prompt(t_shell *sptr)
 {
 	char	**cmds;
 	char	*cmd;
-	int		cmd_idx;
+	char	*temp;
 
 	cmd = 0;
 	cmds = 0;
@@ -72,20 +85,14 @@ void
 		if (cmd == NULL)
 			break ;
 		divide_cmds(&cmds, &cmd);
-		// if (handle_cmd_error(cmds, cmd) < 0)
-		// {
-		// 	finish_cycle(&cmds, &cmd, sptr);
-		// 	continue ;
-		// }
-		cmd_idx = -1;
-		while (cmds && cmds[++cmd_idx])
+		temp = ft_strdup(cmd);
+		if (handle_cmd_error(temp) < 0)
 		{
-			if (cmds[cmd_idx] != NULL)
-			{
-				if (handle_cmd_error(cmds, cmd) > 0)
-					parse_command(sptr, cmds[cmd_idx]);
-			}
+			finish_cycle(&cmds, &cmd, sptr);
+			continue ;
 		}
+		launch_cmd(cmds, sptr);
+		free_ptr(&temp);
 		finish_cycle(&cmds, &cmd, sptr);
 	}
 }

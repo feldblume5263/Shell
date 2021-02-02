@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 06:10:54 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 12:31:55 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ int					count_add_space(char *cmd);
 **	handle_error.c
 */
 
-int					handle_cmd_error(char **cmds, char *cmd);
+int					handle_cmd_error(char *cmd);
 
 int					find_system_error(char **cmds);
 
