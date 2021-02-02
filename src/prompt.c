@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 12:58:55 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 13:44:51 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,12 @@ void
 }
 
 void
-	sig_handler(int signo)
-{
-	if (signo == SIGINT)
-	{
-		g_status = 1;
-		write(1, "\n", 1);
-		print_prompt();
-	}
-}
-
-void
 	prepare_std(t_shell *sptr)
 {
 	sptr->saved_stdout = dup(STDOUT_FILENO);
 	sptr->saved_stdin = dup(STDIN_FILENO);
 	sptr->exit_code = 1;
 	g_status = 0;
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
 }
 
 void
@@ -78,6 +65,7 @@ void
 	cmd = 0;
 	cmds = 0;
 	prepare_std(sptr);
+	sig_init();
 	while (sptr->exit_code)
 	{
 		print_prompt();

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 12:31:55 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 13:45:44 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -391,5 +391,13 @@ int					set_data_with_redirection(t_pipe *pptr,\
 												const char *raw);
 
 void				dup2_and_close(int *fd, const int option);
+
+/*
+**	signal.c
+*/
+
+void				sig_handler(int signo);
+
+void				sig_init(void);
 
 #endif

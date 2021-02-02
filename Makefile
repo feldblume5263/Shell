@@ -6,7 +6,7 @@
 #    By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/01 20:54:55 by junhpark          #+#    #+#              #
-#    Updated: 2021/02/02 06:11:09 by kyeo             ###   ########.fr        #
+#    Updated: 2021/02/02 13:46:10 by kyeo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC_NAME		= cd.c \
 				set_cmd_data.c \
 				start_end.c \
 				unset.c \
-				path_utils.c
+				path_utils.c \
+				signal.c
 
 SRC_PATH = ./src
 
