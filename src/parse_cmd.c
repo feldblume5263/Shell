@@ -6,11 +6,36 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 14:20:53 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 15:13:14 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void
+	check_only_space(char **cmd)
+{
+	int			idx;
+	int			count;
+	char 		*res;
+
+	idx = 0;
+	count = 0;
+	while ((*cmd)[idx])
+	{
+		if ((*cmd)[idx] == ' ')
+			count++;
+		idx++;
+	}
+	if (count + 1 == idx)
+	{
+		free(*cmd);
+		res = (char *)malloc(sizeof(char) * 2);
+		res[0] = '\n';
+		res[1] = '\0';
+		*cmd = res;
+	}
+}
 
 void
 	dispence_command(t_shell *sptr, char **data, const int builtins)

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 14:41:38 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 15:11:58 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void
 {
 	if (*cmd != NULL)
 	{
+		check_only_space(cmd);
 		change_redir(cmd);
 		refine_cmd(cmd);
 		get_env_sign(cmd);
