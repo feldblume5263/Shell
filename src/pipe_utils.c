@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:55:56 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 14:17:50 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 18:07:47 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void
 		wait(&status);
 		if (status == 256)
 			g_status = 2;
-		else
-			g_status = 0;
 		count += 1;
 	}
 }
@@ -56,7 +54,6 @@ void
 	if (cptr->builtins == 1)
 		dispence_command(sptr, cptr->cmds_redirected[cptr->cmds_index],\
 				cptr->builtins);
-	g_prompt_status = 1;
 }
 
 void

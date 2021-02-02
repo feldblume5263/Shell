@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 15:47:01 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 18:49:14 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void
 	sptr->saved_stdin = dup(STDIN_FILENO);
 	sptr->exit_code = 1;
 	g_status = 0;
+	g_echo_flag = 0;
 }
 
 void
@@ -53,6 +54,30 @@ void
 	{
 		if (cmds[cmd_idx] != NULL)
 			parse_command(sptr, cmds[cmd_idx]);
+	}
+}
+
+void
+	check_echo_status(const char *cmd)
+{
+	int		index;
+	int		size;
+
+	size = ft_strlen(cmd) - ECHO_STATUS_SIZE;
+	index = 0;
+	while (index < size)
+	{
+		if (ft_strncmp(&(cmd[index]), ECHO_STATUS, ECHO_STATUS_SIZE) == 0)
+		{
+			g_echo_flag += 1;
+			break ;
+		}
+		index += 1;
+	}
+	if (g_echo_flag == 2)
+	{
+		g_status = 0;
+		g_echo_flag = 0;
 	}
 }
 
@@ -73,6 +98,7 @@ void
 		getcmd(&cmd);
 		if (cmd == NULL)
 			break ;
+		check_echo_status(cmd);
 		divide_cmds(&cmds, &cmd);
 		temp = ft_strdup(cmd);
 		if (handle_cmd_error(temp) < 0)
