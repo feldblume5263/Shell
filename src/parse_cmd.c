@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 15:44:21 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 15:50:23 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void
 {
 	int			idx;
 	int			count;
-	char 		*res;
+	char		*res;
 
 	idx = 0;
 	count = 0;
@@ -61,10 +61,11 @@ void
 }
 
 void
-	init_cdata(t_cmd *dptr)
+	init_cdata(t_cmd *dptr, char *raw)
 {
 	dptr->cmds_redirected = 0;
 	dptr->cmds_index = -1;
+	set_data_with_redirection(&(dptr->pip), &(dptr->cmds_redirected), raw);
 }
 
 void
@@ -72,8 +73,7 @@ void
 {
 	t_cmd		cdata;
 
-	init_cdata(&cdata);
-	set_data_with_redirection(&(cdata.pip), &(cdata.cmds_redirected), raw);
+	init_cdata(&cdata, raw);
 	while (cdata.cmds_redirected[++cdata.cmds_index])
 	{
 		cdata.builtins = is_builtins(cdata.cmds_redirected[cdata.cmds_index]);
