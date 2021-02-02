@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 15:50:50 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 18:44:44 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,9 +241,7 @@ int					count_ch(char **data);
 
 void				builtins_echo(t_shell *sptr, char **data);
 
-void				print_with_opt(t_shell *sptr, char **data);
-
-void				print_without_opt(t_shell *sptr, char **data);
+void				print_with_opt(t_shell *sptr, char **data, int num);
 
 void				print_env(t_shell *sptr, char *env);
 /*
