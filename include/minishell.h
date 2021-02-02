@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 15:28:14 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 15:29:31 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ void				parse_command(t_shell *sptr, char *raw);
 void				dispence_command(t_shell *sptr,\
 										char **data,\
 										const int builtins);
+
+void				check_only_space(char **cmd);
 
 /*
 **	parse_utils.c
