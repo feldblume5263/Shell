@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 14:41:38 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 15:14:26 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void
 void
 	print_prompt(void)
 {
-	write(1, "minishell # ", 13);
-	g_prompt_status = 1;
+	write(2, "minishell # ", 13);
 }
 
 void
@@ -69,13 +68,13 @@ void
 	sig_init();
 	while (sptr->exit_code)
 	{
-		if (g_prompt_status)
-			print_prompt();
-		else if (g_prompt_status == 0)
-			g_prompt_status = 1;
+		print_prompt();
 		getcmd(&cmd);
 		if (cmd == NULL)
 			break ;
+		printf("CMD: %s\n", cmd);
+		if (cmd && *cmd == '\n')
+			continue ;
 		divide_cmds(&cmds, &cmd);
 		temp = ft_strdup(cmd);
 		if (handle_cmd_error(temp) < 0)
