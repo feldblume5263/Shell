@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 13:12:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 13:44:32 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 14:35:21 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,20 @@ void
 	if (signo == SIGINT)
 	{
 		g_status = 1;
-		write(1, "\n", 1);
+		write(2, "\n", 1);
 		print_prompt();
+		g_prompt_status = 0;
+	}
+	else if (signo == SIGQUIT)
+	{
+		ft_putstr_fd("\b\b", 1);
 	}
 }
 
 void
 	sig_init(void)
 {
+	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
+	g_prompt_status = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:55:56 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 13:50:24 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 14:17:50 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void
 	if (cptr->builtins == 1)
 		dispence_command(sptr, cptr->cmds_redirected[cptr->cmds_index],\
 				cptr->builtins);
+	g_prompt_status = 1;
 }
 
 void

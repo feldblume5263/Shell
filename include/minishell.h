@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 13:45:44 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 14:31:10 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct		s_shell
 }					t_shell;
 
 int					g_status;
+int					g_prompt_status;
 
 /*
 **	prompt.c
