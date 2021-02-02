@@ -6,7 +6,7 @@
 #    By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/01 20:54:55 by junhpark          #+#    #+#              #
-#    Updated: 2021/02/02 13:46:10 by kyeo             ###   ########.fr        #
+#    Updated: 2021/02/02 14:23:42 by junhpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,8 @@ HEADER	= -I./include
 
 CFLAG	= -Wall -Wextra -Werror
 
+MEM = -g -fsanitize=address
+
 LIBFT	= ./lib/libft.a
 
 LIBS	= -L./lib/libft -lft
@@ -70,6 +72,9 @@ all	: $(NAME)
 
 $(NAME)	: $(OBJ) $(LIBFT)
 	gcc -o $(NAME) $(OBJ) $(HEADER) $(CFLAG) $(LIBS)
+
+mem	: $(OBJ) $(LIBFT)
+	gcc -o $(NAME) $(OBJ) $(HEADER) $(CFLAG) $(MEM) $(LIBS)
 
 $(LIBFT):
 	$(MAKE) -C ./lib/libft
