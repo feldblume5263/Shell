@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 06:00:28 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 10:59:23 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,19 @@ void
 		if (cmd == NULL)
 			break ;
 		divide_cmds(&cmds, &cmd);
-		/*
-		if (handle_cmd_error(cmds, cmd) < 0)
-		{
-			finish_cycle(&cmds, &cmd, sptr);
-			continue ;
-		}
-		*/
+		// if (handle_cmd_error(cmds, cmd) < 0)
+		// {
+		// 	finish_cycle(&cmds, &cmd, sptr);
+		// 	continue ;
+		// }
 		cmd_idx = -1;
 		while (cmds && cmds[++cmd_idx])
 		{
 			if (cmds[cmd_idx] != NULL)
-				parse_command(sptr, cmds[cmd_idx]);
+			{
+				if (handle_cmd_error(cmds, cmd) > 0)
+					parse_command(sptr, cmds[cmd_idx]);
+			}
 		}
 		finish_cycle(&cmds, &cmd, sptr);
 	}

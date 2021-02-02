@@ -6,13 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:48:05 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 01:20:23 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 07:56:14 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		distinguish_semicolon(char **cmd)
+void
+	distinguish_semicolon(char **cmd)
 {
 	int		idx;
 
@@ -30,7 +31,8 @@ void		distinguish_semicolon(char **cmd)
 	}
 }
 
-void		revive_quotes(char **cmd)
+void
+	revive_quotes(char **cmd)
 {
 	char	*cmd_dup;
 	int		idx;
@@ -59,7 +61,8 @@ void		revive_quotes(char **cmd)
 	cmd_dup = 0;
 }
 
-void		distinguish_quotes(char **cmd)
+void
+	distinguish_quotes(char **cmd)
 {
 	int		idx;
 
@@ -80,7 +83,8 @@ void		distinguish_quotes(char **cmd)
 	revive_quotes(cmd);
 }
 
-void		distinguish_spaces(char **cmd)
+void
+	distinguish_spaces(char **cmd)
 {
 	int		idx;
 
@@ -100,7 +104,8 @@ void		distinguish_spaces(char **cmd)
 	}
 }
 
-void		refine_cmd(char **cmd)
+void
+	refine_cmd(char **cmd)
 {
 	distinguish_quotes(cmd);
 	distinguish_spaces(cmd);

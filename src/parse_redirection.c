@@ -6,13 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:09:44 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 01:27:45 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 07:55:00 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			change_redir(char **cmd)
+void
+	change_redir(char **cmd)
 {
 	int			idx;
 
@@ -43,7 +44,8 @@ void			change_redir(char **cmd)
 	}
 }
 
-int				find_redir(char *chunk)
+int
+	find_redir(char *chunk)
 {
 	if (chunk && ft_strlen(chunk) == 1 && ft_strncmp(chunk, "<", 1) == 0)
 		return (1);
@@ -55,7 +57,8 @@ int				find_redir(char *chunk)
 		return (0);
 }
 
-void			get_redir(char *red, char ***res)
+void
+	get_redir(char *red, char ***res)
 {
 	int			res_i;
 
@@ -68,7 +71,8 @@ void			get_redir(char *red, char ***res)
 	(*res)[++res_i] = 0;
 }
 
-void			ch_without_redir(char ***data, char ***res, char ***redir)
+void
+	ch_without_redir(char ***data, char ***res, char ***redir)
 {
 	int			cmd_i;
 	int			res_i;
@@ -96,7 +100,8 @@ void			ch_without_redir(char ***data, char ***res, char ***redir)
 	*data = *res;
 }
 
-int				parse_redirection(char ***data, char ***redir)
+int
+	parse_redirection(char ***data, char ***redir)
 {
 	char		**res;
 

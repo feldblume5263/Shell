@@ -6,13 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:54:58 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 01:42:40 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 07:55:21 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			get_env_sign(char **cmd)
+void
+	get_env_sign(char **cmd)
 {
 	int			idx;
 
@@ -22,12 +23,13 @@ void			get_env_sign(char **cmd)
 	while ((*cmd)[++idx])
 	{
 		if ((*cmd)[idx] == '$' && (*cmd)[idx - 1] != '\\'\
-			&& !(is_env_closed(*cmd, idx)))
+			&& is_env_closed(*cmd, idx))
 			(*cmd)[idx] = (char)ENV;
 	}
 }
 
-void			remove_quotes(char **cmd)
+void
+	remove_quotes(char **cmd)
 {
 	char		*res;
 	int			idx;
@@ -53,7 +55,8 @@ void			remove_quotes(char **cmd)
 	*cmd = res;
 }
 
-void			remove_backslash(char **cmd)
+void
+	remove_backslash(char **cmd)
 {
 	char		*res;
 	int			idx;
@@ -81,7 +84,8 @@ void			remove_backslash(char **cmd)
 	*cmd = res;
 }
 
-void			delete_subs(char **cmd)
+void
+	delete_subs(char **cmd)
 {
 	if (cmd != NULL && *cmd != NULL && **cmd != '\0')
 	{
@@ -90,7 +94,8 @@ void			delete_subs(char **cmd)
 	}
 }
 
-int				is_closed(char *str, int idx)
+int
+	is_closed(char *str, int idx)
 {
 	int			big_q;
 	int			lit_q;

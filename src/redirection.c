@@ -6,13 +6,14 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 11:32:20 by junhpark          #+#    #+#             */
-/*   Updated: 2021/01/31 19:04:49 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 07:55:55 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				redirect_in(char *redir)
+int
+	redirect_in(char *redir)
 {
 	int			infd;
 	char		*infile;
@@ -31,7 +32,8 @@ int				redirect_in(char *redir)
 	return (close(infd));
 }
 
-int				redirect_out_d(char *redir)
+int
+	redirect_out_d(char *redir)
 {
 	int			outfd;
 	char		*outfile;
@@ -50,7 +52,8 @@ int				redirect_out_d(char *redir)
 	return (close(outfd));
 }
 
-int				redirect_out(char *redir)
+int
+	redirect_out(char *redir)
 {
 	int			outfd;
 	char		*outfile;
@@ -69,7 +72,8 @@ int				redirect_out(char *redir)
 	return (close(outfd));
 }
 
-int				handle_redir_error(char **redir)
+int
+	handle_redir_error(char **redir)
 {
 	int			idx;
 
@@ -96,7 +100,8 @@ int				handle_redir_error(char **redir)
 	return (1);
 }
 
-int				redirection(char **redir)
+int
+	redirection(char **redir)
 {
 	int			idx;
 	int			error_code;

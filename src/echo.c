@@ -6,13 +6,34 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:30:41 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 03:55:30 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 07:53:57 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			print_env(t_shell *sptr, char *env)
+int
+	is_env_closed(char *str, int idx)
+{
+	int				lit_q;
+	int				start;
+
+	lit_q = 0;
+	start = 0;
+	while (str[start] && start < idx)
+	{
+		if (str[start] == (char)LIT_Q)
+			lit_q++;
+		start++;
+	}
+	if (lit_q % 2 == 0)
+		return (1);
+	else
+		return (0);
+}
+
+void
+	print_env(t_shell *sptr, char *env)
 {
 	t_env	*temp;
 
@@ -33,7 +54,8 @@ void			print_env(t_shell *sptr, char *env)
 		write(1, temp->data, ft_strlen(temp->data));
 }
 
-void			print_without_opt(t_shell *sptr, char **data)
+void
+	print_without_opt(t_shell *sptr, char **data)
 {
 	int			chunk_idx;
 	int			idx;
@@ -41,7 +63,6 @@ void			print_without_opt(t_shell *sptr, char **data)
 	chunk_idx = 0;
 	while (data[chunk_idx])
 	{
-		get_env_sign(&(data[chunk_idx]));
 		idx = 0;
 		while (data[chunk_idx][idx] && data[chunk_idx][idx] != (char)ENV)
 		{
@@ -62,7 +83,8 @@ void			print_without_opt(t_shell *sptr, char **data)
 	write(1, "\n", 1);
 }
 
-void			print_with_opt(t_shell *sptr, char **data)
+void
+	print_with_opt(t_shell *sptr, char **data)
 {
 	int			chunk_idx;
 	int			idx;
@@ -70,7 +92,6 @@ void			print_with_opt(t_shell *sptr, char **data)
 	chunk_idx = 0;
 	while (data[chunk_idx])
 	{
-		get_env_sign(&(data[chunk_idx]));
 		idx = 0;
 		while (data[chunk_idx][idx] && data[chunk_idx][idx] != (char)ENV)
 		{
@@ -87,7 +108,8 @@ void			print_with_opt(t_shell *sptr, char **data)
 	}
 }
 
-void			builtins_echo(t_shell *sptr, char **data)
+void
+	builtins_echo(t_shell *sptr, char **data)
 {
 	if (ft_strlen(data[0]) == 2 && ft_strncmp(data[0], "-n", 2) == 0)
 		print_with_opt(sptr, &(data[1]));
