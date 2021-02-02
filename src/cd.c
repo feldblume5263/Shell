@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:38:37 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 16:12:48 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 21:17:49 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void
 	char			cur_dirname[PATH_MAX];
 	t_env			*temp;
 
-	if (change_old_and_cur(sptr, new_dirname) == 1)
+	if (new_dirname != (char *)0 &&\
+		change_old_and_cur(sptr, new_dirname) == 1)
 		return ;
 	temp = 0;
 	set_dir(cur_dirname);
