@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:38:37 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 21:17:49 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 21:59:07 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,14 @@ void
 void
 	change_dir(const char *path)
 {
+	char			*err_str;
+
 	if (chdir(path) == -1)
 	{
-		perror("mini: cd");
+		write(2, "mini: cd: ", 10);
+		err_str = strerror(errno);
+		write(2, err_str, ft_strlen(err_str));
+		write(2, "\n", 1);
 		g_status = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 20:27:14 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 21:50:22 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <signal.h>
-
-/*
-**	<stdio.h> for debugging
-*/
-
-# include <stdio.h>
+# include <string.h>
 
 typedef struct		s_pipe
 {
