@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 18:44:44 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 19:59:20 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define RDRIN					134
 # define PIPE					135
 # define BSLASH					136
+
+# define ECHO_STATUS			"echo $?"
+# define ECHO_STATUS_SIZE		7
 
 # define CMD_NOT_FOUND			"command not found\n"
 # define CMD_NOT_FOUND_SIZE		18
@@ -99,6 +102,7 @@ typedef struct		s_shell
 }					t_shell;
 
 int					g_status;
+int					g_echo_flag;
 
 /*
 **	prompt.c

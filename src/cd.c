@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:38:37 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 05:22:22 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 16:12:48 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ void
 	getcwd(dir, PATH_MAX);
 }
 
+void
+	change_dir(const char *path)
+{
+	if (chdir(path) == -1)
+	{
+		perror("mini: cd");
+		g_status = 1;
+	}
+}
+
 int
 	change_old_and_cur(t_shell *sptr, const char *new_dirname)
 {
@@ -45,8 +55,7 @@ int
 		new->data = ft_strdup(new_dirname);
 		write(1, new_dirname, ft_strlen(new_dirname));
 		write(1, "\n", 1);
-		if (chdir(new_dirname) == -1)
-			perror("mini: cd");
+		change_dir(new_dirname);
 		free_ptr((char **)&new_dirname);
 		return (1);
 	}
@@ -68,11 +77,10 @@ void
 		(*new_dirname == '~' && ft_strlen(new_dirname) == 1))
 	{
 		temp = find_env_by_name(sptr->env, "HOME");
-		if (chdir(temp->data) == -1)
-			perror("mini: cd");
+		change_dir(temp->data);
 	}
-	else if (chdir(new_dirname) == -1)
-		perror("mini: cd");
+	else
+		change_dir(new_dirname);
 	set_dir(cur_dirname);
 	replace_pwd_data(sptr, temp, cur_dirname, "PWD");
 }
