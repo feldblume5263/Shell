@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:09:44 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 07:55:00 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 14:04:02 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void
 {
 	int			idx;
 
-	idx = 0;
-	while ((*cmd)[idx])
+	idx = -1;
+	while ((*cmd)[++idx])
 	{
 		if ((*cmd)[idx] == '>')
 		{
@@ -33,14 +33,11 @@ void
 		else if ((*cmd)[idx] == '|')
 		{
 			if (idx > 0 && (*cmd)[idx - 1] == '\\')
-				(*cmd)[idx] =  (char)PIPE;
+				(*cmd)[idx] = (char)PIPE;
 		}
 		else if ((*cmd)[idx] == '\\')
-		{
 			if (idx > 0 && (*cmd)[idx - 1] == '\\')
-				(*cmd)[idx] =  (char)BSLASH;
-		}
-		idx++;
+				(*cmd)[idx] = (char)BSLASH;
 	}
 }
 
