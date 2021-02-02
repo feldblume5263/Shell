@@ -6,7 +6,7 @@
 /*   By: kyeo <kyeo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 13:12:36 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 15:26:56 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 15:44:29 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void
 {
 	if (signo == SIGINT)
 	{
-		wirte(1, "\n", 1);
+		write(1, "\n", 1);
 		signal(SIGINT, child_sig_handler);
 	}
 }

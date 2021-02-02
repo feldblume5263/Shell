@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:43:48 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 15:29:15 by kyeo             ###   ########.fr       */
+/*   Updated: 2021/02/02 15:42:31 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,14 @@ void
 	cmd = 0;
 	cmds = 0;
 	prepare_std(sptr);
-	sig_init();
+	//sig_init();
 	while (sptr->exit_code)
 	{
+		sig_init();
 		print_prompt();
 		getcmd(&cmd);
 		if (cmd == NULL)
 			break ;
-		printf("CMD: %s\n", cmd);
-		if (cmd && *cmd == '\n')
-			continue ;
 		divide_cmds(&cmds, &cmd);
 		temp = ft_strdup(cmd);
 		if (handle_cmd_error(temp) < 0)

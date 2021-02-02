@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 22:31:32 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 15:13:14 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 15:44:21 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void
 		if (cdata.cmds_redirected[cdata.cmds_index + 1])
 			pipe(cdata.pip.new_fds);
 		cdata.pid = fork();
+		signal(SIGINT, child_sig_handler);
 		if (cdata.pid == 0)
 		{
 			pipe_child(&cdata);
