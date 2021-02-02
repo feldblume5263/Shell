@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 21:11:47 by kyeo              #+#    #+#             */
-/*   Updated: 2021/02/02 19:59:20 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 20:27:14 by kyeo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,21 @@ int					g_echo_flag;
 
 void				prompt(t_shell *sptr);
 
-void				prepare_std(t_shell *sptr);
-
-void				print_prompt();
-
 void				divide_cmds(char ***cmds, char **cmd);
 
-void				sig_handler(int signo);
+/*
+**	prompt_utils.c
+*/
+
+void				print_prompt(void);
+
+void				prepare_std(t_shell *sptr, char **cmd, char ***cmds);
+
+void				launch_cmd(char **cmds, t_shell *sptr);
+
+void				check_echo_status(const char *cmd);
+
+int					check_piped_exit(char **cmd);
 
 /*
 **	start_end.c

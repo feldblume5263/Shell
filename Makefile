@@ -6,7 +6,7 @@
 #    By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/01 20:54:55 by junhpark          #+#    #+#              #
-#    Updated: 2021/02/02 14:23:42 by junhpark         ###   ########.fr        #
+#    Updated: 2021/02/02 20:26:01 by kyeo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_NAME		= cd.c \
 				pipe_utils.c \
 				prepare_line.c \
 				prompt.c \
+				prompt_utils.c \
 				pwd.c \
 				redirection_utils.c \
 				redirection.c \
