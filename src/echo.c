@@ -6,7 +6,7 @@
 /*   By: junhpark <junhpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:30:41 by junhpark          #+#    #+#             */
-/*   Updated: 2021/02/02 07:53:57 by junhpark         ###   ########.fr       */
+/*   Updated: 2021/02/02 16:02:57 by junhpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,15 @@ void
 void
 	builtins_echo(t_shell *sptr, char **data)
 {
+	int				idx;
+
 	if (ft_strlen(data[0]) == 2 && ft_strncmp(data[0], "-n", 2) == 0)
-		print_with_opt(sptr, &(data[1]));
+	{
+		idx = 1;
+		while (ft_strlen(data[idx]) == 2 && ft_strncmp(data[idx], "-n", 2) == 0)
+			idx++;
+		print_with_opt(sptr, &(data[idx]));
+	}
 	else
 		print_without_opt(sptr, data);
 }
